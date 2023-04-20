@@ -50,6 +50,12 @@ public class Enemy : Character
         }
     }
 
+    public override void DestorySelf()
+    {
+        base.DestorySelf();
+        EnemyManager._instance.enemies.Remove(this);
+    }
+
     private void Attack(Collider2D other)
     {
         if (!_canCollide) return;

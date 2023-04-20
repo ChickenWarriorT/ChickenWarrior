@@ -1021,7 +1021,7 @@ MonoBehaviour:
   moveSpeed: 5
   attackRange: 5
   defaultAttackCD: 10
-  attackSpeed: 100
+  attackSpeed: 50
   attackCD: 2
   OnBeAttacked:
     m_PersistentCalls:

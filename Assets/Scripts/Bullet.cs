@@ -30,13 +30,13 @@ public class Bullet : MonoBehaviour
 
     private void Move()
     {
-        
+
         Vector2 position = (Vector2)transform.position + _moveDirection;
         if (position != currentTarget)
         {
             rb.DOMove(position, speed).SetSpeedBased();
         }
-        
+
     }
 
     public void Init(GameObject caster, GameObject target, int damage)
@@ -53,18 +53,26 @@ public class Bullet : MonoBehaviour
 
         if (target != null)
         {
-           return  (target.position - transform.position).normalized;
+            return (target.position - transform.position).normalized;
         }
         return Vector3.zero;
 
 
     }
 
-    private Enemy FindRandomEnemyEnemy()
+    private Enemy FindRandomEnemyNotIncludeTarget(Enemy target)
     {
-        //EnemySpawner._instance.enemies
-        //MoveDirectionPointToPoint
-        return null;
+        List<Enemy> enemyList = EnemyManager._instance.enemies;
+        enemyList.Remove(target);
+
+        int randomIndex = Random.Range(0, enemyList.Count);
+
+        return enemyList[randomIndex];
+    }
+
+    private void ChangeCurrentDirection(Transform target)
+    {
+        _moveDirection = MoveDirectionPointToPoint(target);
     }
 
     public void Destroy()
@@ -75,13 +83,19 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Character character = other.GetComponent<Character>();
-        
-            if (other.CompareTag("Enemy"))
+
+        if (other.CompareTag("Enemy"))
+        {
+            if (bounceCount > 0)
             {
                 character.TakeDamage(damage);
-                Destroy();
+                bounceCount -= 1;
+                ChangeCurrentDirection(FindRandomEnemyNotIncludeTarget((Enemy)character).transform);
             }
-        
+            else
+                Destroy();
+        }
+
     }
 
 }

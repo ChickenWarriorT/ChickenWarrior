@@ -61,6 +61,11 @@ public class Player : Character
         OnHealthChanged.Invoke();
     }
 
+    public override void DestorySelf()
+    {
+        
+    }
+
     public void RangedAttack()
     {
         if (bullet != null)
@@ -68,13 +73,15 @@ public class Player : Character
             GameObject enemy = FindEnemy();
             if (enemy != null)
             {
-                
+                //子弹出生点离角色的距离
                 Vector2 offset = (enemy.transform.position - transform.position).normalized * weaponOffsetRange;
                 Bullet bult=BulletManager._instance.CreateBullet(bullet, offset);
                 bult.Init(gameObject, enemy, AttakeDamage);
             }
         }
     }
+
+
 
     public void AutoAttack()
     {

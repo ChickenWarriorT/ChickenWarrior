@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    public List<Enemy> enemies;
 
     [SerializeField]
     private Enemy enemy;
@@ -46,8 +44,7 @@ public class EnemySpawner : MonoBehaviour
 
         //Instantiate(enemy, (Vector2)PlayerManager._instance.player.transform.position , Quaternion.identity);
         Enemy e = Instantiate(enemy, relatePos, Quaternion.identity);
-        enemies.Add(e);
-
+        EnemyManager._instance.enemies.Add(e);
 
     }
 }

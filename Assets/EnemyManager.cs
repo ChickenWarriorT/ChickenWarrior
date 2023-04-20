@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager _instance;
 
     [SerializeField]
-    private List<Enemy> enemies;
+    public List<Enemy> enemies;
     private void Awake()
     {
         _instance = this;

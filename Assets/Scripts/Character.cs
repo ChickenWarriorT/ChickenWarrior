@@ -29,8 +29,9 @@ public class Character : MonoBehaviour
     public int AttakeDamage { get => attakDamage; set => attakDamage = value; }
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public int AttackRange { get => attackRange; set => attackRange = value; }
-    public float AttackCD {
-        get => SpeedToTimePerAttack(defaultAttackCD,attackSpeed);
+    public float AttackCD
+    {
+        get => SpeedToTimePerAttack(defaultAttackCD, attackSpeed);
     }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public float DefaultAttackCD { get => defaultAttackCD; set => defaultAttackCD = value; }
@@ -40,19 +41,38 @@ public class Character : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        _defaultColor=spriteRenderer.color;
+        _defaultColor = spriteRenderer.color;
         rb = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
     {
-        
+
     }
 
-    private float SpeedToTimePerAttack(float atkCD,float atkSpeed)
+    private void Update()
+    {
+        if (IsDie())
+        {
+            DestorySelf();
+        }
+    }
+    public bool IsDie()
+    {
+        if (health <= 0)
+            return true;
+        return false;
+    }
+
+    public virtual void DestorySelf()
+    {
+        Destroy(this.gameObject);
+    }
+
+    private float SpeedToTimePerAttack(float atkCD, float atkSpeed)
     {
         float defaultSpeed = 1.0f / atkCD;
         float currentSpeed = defaultSpeed * (1.0f + atkSpeed);
-        float currentAtkCD = 1.0f/ currentSpeed;
+        float currentAtkCD = 1.0f / currentSpeed;
         Debug.Log(currentAtkCD);
         return currentAtkCD;
     }
@@ -65,5 +85,5 @@ public class Character : MonoBehaviour
         OnBeAttacked.Invoke();
     }
 
-    
+
 }
