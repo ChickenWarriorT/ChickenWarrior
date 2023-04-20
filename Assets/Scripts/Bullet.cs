@@ -5,13 +5,16 @@ using DG.Tweening;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector2 targetPosition;
+    private Vector2 currentTarget;
     private Vector2 _moveDirection;
     private Rigidbody2D rb;
     [SerializeField]
     private float speed;
     [SerializeField]
     private int damage;
+
+    [SerializeField]
+    private int bounceCount;
 
     private GameObject caster;
 
@@ -27,8 +30,9 @@ public class Bullet : MonoBehaviour
 
     private void Move()
     {
+        
         Vector2 position = (Vector2)transform.position + _moveDirection;
-        if (position != targetPosition)
+        if (position != currentTarget)
         {
             rb.DOMove(position, speed).SetSpeedBased();
         }
@@ -39,12 +43,12 @@ public class Bullet : MonoBehaviour
     {
         this.caster = caster;
         this.damage = damage;
-        targetPosition = target.transform.position;
-        _moveDirection = MoveDirection(target.transform);
+        currentTarget = target.transform.position;
+        _moveDirection = MoveDirectionPointToPoint(target.transform);
         transform.rotation = Quaternion.LookRotation(Vector3.forward, _moveDirection);
     }
 
-    private Vector2 MoveDirection(Transform target)
+    private Vector2 MoveDirectionPointToPoint(Transform target)
     {
 
         if (target != null)
@@ -54,6 +58,13 @@ public class Bullet : MonoBehaviour
         return Vector3.zero;
 
 
+    }
+
+    private Enemy FindRandomEnemyEnemy()
+    {
+        //EnemySpawner._instance.enemies
+        //MoveDirectionPointToPoint
+        return null;
     }
 
     public void Destroy()
