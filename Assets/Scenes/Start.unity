@@ -546,7 +546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bc170582d05ff4cb955d5199cc502a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
   enemy: {fileID: 4750316473145037256, guid: d34043ca1ac0f454bbf851f7fc49145b, type: 3}
   insideRadius: 3
   outsideRadius: 10
@@ -1017,9 +1016,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
-  attakDamage: 5
-  moveSpeed: 5
-  attackRange: 5
+  attakDamage: 2
+  moveSpeed: 2
+  attackRange: 3
   defaultAttackCD: 10
   attackSpeed: 50
   attackCD: 2
