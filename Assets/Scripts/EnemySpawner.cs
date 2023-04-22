@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private float spawnCD;
 
-    private float time;
+    private float time=1.0f;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
 
-        time = spawnCD;
+        //time = spawnCD;
     }
 
     private void Update()

@@ -103,6 +103,10 @@ MonoBehaviour:
   speed: 10
   damage: 5
   bounceCount: 6
+  startPosition: {x: 0, y: 0}
+  afterbounceDistance: 99
+  flyDistance: 40
+  isTracing: 1
 --- !u!50 &7508369373002304374
 Rigidbody2D:
   serializedVersion: 4
