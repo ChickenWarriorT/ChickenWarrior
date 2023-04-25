@@ -27,9 +27,17 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        time -= Time.deltaTime;
-        if (time <= 0.0f)
+        //time -= Time.deltaTime;
+        //if (time <= 0.0f)
+        //{
+        //    SpawnInRandomInPosition(insideRadius, outsideRadius);
+        //    time = spawnCD;
+        //}
+
+
+        if (Input.GetKeyDown(KeyCode.Q))
         {
+            print("Éú³É¹ÖÎï¡£¡£¡£¡£¡£¡£");
             SpawnInRandomInPosition(insideRadius, outsideRadius);
             time = spawnCD;
         }

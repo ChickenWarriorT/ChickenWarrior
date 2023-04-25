@@ -94,13 +94,17 @@ public class Player : Character
 
         Physics2D.OverlapCircleNonAlloc(transform.position, AttackRange, results);
 
-        foreach (var result in results)
+        if (results!=null)
         {
-            if (result.CompareTag("Enemy"))
+            foreach (var result in results)
             {
-                return result.gameObject;
+                if (result!=null&&result.CompareTag("Enemy"))
+                {
+                    return result.gameObject;
+                }
             }
         }
+      
         return null;
     }
 

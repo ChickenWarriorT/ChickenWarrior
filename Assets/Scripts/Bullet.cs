@@ -6,6 +6,17 @@ using DG.Tweening;
 public class Bullet : MonoBehaviour
 {
     private Transform currentTarget;
+
+    /// <summary>
+    /// 子弹的的前进方向
+    /// </summary>
+    private Vector3 dir;
+
+    private bool isMove = false;
+
+
+    private float moveSpeed = 100;
+
     private Vector2 _moveDirection;
     private Rigidbody2D rb;
     [SerializeField]
@@ -20,7 +31,7 @@ public class Bullet : MonoBehaviour
     private Vector2 startPosition;
 
     [SerializeField]
-    private float afterbounceDistance = 99;
+    private float afterbounceDistance = 5;
 
     [SerializeField]
     private float flyDistance;
@@ -35,40 +46,13 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        Destroy(this.gameObject, 10);
     }
 
-    private void FixedUpdate()
+
+    private void Update()
     {
-        DestroyExcceedDistance();
-        Move();
-    }
-
-    private void Move()
-    {
-
-        Vector2 position = (Vector2)transform.position + _moveDirection;
-        if (position != (Vector2)currentTarget.transform.position)
-        {
-            rb.DOMove(position, speed).SetSpeedBased();
-        }
-        if (isTracing)
-        {
-            if (currentTarget != null)
-                TracingTarget(currentTarget);
-        }
-
-    }
-
-    private void DestroyExcceedDistance()
-    {
-        currentFlyDistance = ((Vector2)transform.position - startPosition).magnitude;
-        if (currentFlyDistance > flyDistance)
-            Destroy();
-    }
-
-    private void TracingTarget(Transform target)
-    {
-        ChangeCurrentDirection(target);
+        transform.Translate(dir* Time.deltaTime*speed);
     }
 
 
@@ -76,23 +60,22 @@ public class Bullet : MonoBehaviour
     {
         this.caster = caster;
         this.damage = damage;
-        currentTarget = target.transform;
+        //currentTarget = target.transform;
+        var tempDir = Vector3.Normalize(target.transform.position - this.transform.position);
+        dir = new Vector3(tempDir.x,tempDir.y,0);
         startPosition = this.transform.position;
-        ChangeCurrentDirection(currentTarget);
+
+        ////修改子弹的朝向
+        //transform.rotation = Quaternion.LookRotation(dir);
+
+        isMove = true;
+        //ChangeCurrentDirection(currentTarget);
     }
 
-    private Vector2 MoveDirectionPointToPoint(Transform target)
-    {
-
-        if (target != null)
-        {
-            return (target.position - transform.position).normalized;
-        }
-        return Vector3.zero;
-    }
 
     private Enemy FindRandomEnemyNotIncludeTarget(Enemy target)
     {
+        //TODO 确认怪物生成后是否加入了List 怪物死亡是否移除
         List<Enemy> enemyList = EnemyManager._instance.enemies;
         enemyList.Remove(target);
         if (enemyList.Count <= 0)
@@ -104,64 +87,38 @@ public class Bullet : MonoBehaviour
         return enemyList[randomIndex];
     }
 
-    private void FindCurrentEnemyDirection(Enemy character)
-    {
-        
-    }
-
-
-    public Vector2 GetRandomDirection()
-    {
-        float angle = Random.Range(0f, 2f * Mathf.PI);
-        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
-    }
-
-    private void ChangeCurrentDirection(Transform target)
-    {
-        if (target != null)
-        {
-            _moveDirection = MoveDirectionPointToPoint(target);
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, _moveDirection);
-
-        }
-
-    }
-
-    public void Destroy()
-    {
-        Destroy(gameObject);
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Character character = other.GetComponent<Character>();
 
         if (other.CompareTag("Enemy"))
         {
+            Character character = other.GetComponent<Character>();
+            character.TakeDamage(damage);
             if (bounceCount > 0)
             {
-                character.TakeDamage(damage);
                 GetComponent<Collider2D>().enabled = false;
-                bounceCount -= 1;
-                flyDistance = afterbounceDistance;
-                currentFlyDistance = 0.0f;
-                currentTarget = FindRandomEnemyNotIncludeTarget((Enemy)character).transform;
+                bounceCount--;
+                var tempEnemy = FindRandomEnemyNotIncludeTarget((Enemy)character);
 
-                if (currentTarget == null)
+                if (tempEnemy != null)
                 {
-                    _moveDirection = GetRandomDirection();
+                    print(tempEnemy.name);
+                    var tempDir = (tempEnemy.transform.position - this.transform.position).normalized;
+                    dir = new Vector3(tempDir.x, tempDir.y, 0);
                 }
                 else
-                    ChangeCurrentDirection(currentTarget);
+                {
+                    print("未找到怪物，销毁");
+                    Destroy(gameObject);
+                }
             }
             else
-                Destroy();
+            {
+                print("弹跳次数不足，销毁子弹。");
+                Destroy(gameObject);
+            }
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        GetComponent<Collider2D>().enabled = true;
     }
 
 }
