@@ -27,9 +27,7 @@ public class Player : Character
     {
         Move();
     }
-
- 
-
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         _inputDerection = context.ReadValue<Vector2>();

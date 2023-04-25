@@ -120,12 +120,15 @@ public class Bullet : MonoBehaviour
         Debug.Log(randomIndex);
         return enemyList[randomIndex];
     }
+
+    //随机方向
     public Vector2 GetRandomDirection()
     {
         float angle = Random.Range(0f, 2f * Mathf.PI);
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
     }
 
+    //到达最大飞行时间时，销毁
     private void DestoryOnTime()
     {
         flyTime -= Time.fixedDeltaTime;
@@ -135,6 +138,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    //飞行距离，根据速度转换成时间
     public float ConvertFlyDistanceToTime(float distance,float speed)
     {
         return distance / speed;
@@ -158,6 +162,7 @@ public class Bullet : MonoBehaviour
                     target = tempEnemy.transform;
                     print(tempEnemy.name);
                     ChangeDirection(target);
+                    //修改飞行时间为最大飞行时间
                     flyTime = ConvertFlyDistanceToTime(afterbounceDistance, moveSpeed);
                 }
                 else
@@ -167,6 +172,7 @@ public class Bullet : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
                     Debug.Log("随机飞行方向:"+dir);
                     target = null;
+                    //修改飞行时间为最大飞行时间
                     flyTime = ConvertFlyDistanceToTime(afterbounceDistance, moveSpeed);
                 }
             }
