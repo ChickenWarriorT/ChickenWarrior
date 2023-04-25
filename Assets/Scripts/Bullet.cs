@@ -158,7 +158,7 @@ public class Bullet : MonoBehaviour
                     target = tempEnemy.transform;
                     print(tempEnemy.name);
                     ChangeDirection(target);
-                    flyTime = ConvertFlyDistanceToTime(flyDistance, moveSpeed);
+                    flyTime = ConvertFlyDistanceToTime(afterbounceDistance, moveSpeed);
                 }
                 else
                 {
