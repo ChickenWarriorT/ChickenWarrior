@@ -43,14 +43,14 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    //随机生成怪物，在以自身为圆心，大于inRadius半径的圆，小于outRadius半径的圆的区域内
     public void SpawnInRandomInPosition(float inRadius, float outRadius)
     {
 
-        Vector2 p = Random.insideUnitCircle * outsideRadius;
+        Vector2 p = Random.insideUnitCircle * outRadius;
         Vector2 pos = p.normalized * (inRadius + p.magnitude);
         Vector2 relatePos = pos + (Vector2)PlayerManager._instance.player.transform.position;
 
-        //Instantiate(enemy, (Vector2)PlayerManager._instance.player.transform.position , Quaternion.identity);
         Enemy e = Instantiate(enemy, relatePos, Quaternion.identity);
         EnemyManager._instance.enemies.Add(e);
 

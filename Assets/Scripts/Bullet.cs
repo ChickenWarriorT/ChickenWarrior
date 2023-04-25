@@ -10,17 +10,14 @@ public class Bullet : MonoBehaviour
     /// <summary>
     /// 子弹的的前进方向
     /// </summary>
-    private Vector3 dir;
+    private Vector2 dir;
 
     private bool isMove = false;
-
-
-    private float moveSpeed = 100;
 
     private Vector2 _moveDirection;
     private Rigidbody2D rb;
     [SerializeField]
-    private float speed;
+    private float moveSpeed;
     [SerializeField]
     private int damage;
 
@@ -36,6 +33,8 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float flyDistance;
 
+    private float flyTime;
+
     private float currentFlyDistance;
 
     private GameObject caster;
@@ -43,41 +42,76 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private bool isTracing;
 
+    private Transform target;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        Destroy(this.gameObject, 10);
+        //Destroy(this.gameObject, 10);
+        flyTime = ConvertFlyDistanceToTime(flyDistance,moveSpeed);
     }
 
-
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.Translate(dir* Time.deltaTime*speed);
+        Move();
     }
 
 
+    //子弹移动
+    private void Move()
+    {
+        DestoryOnTime();
+        //fixedupdate每秒50帧，所以乘以50
+        rb.velocity = dir * moveSpeed*50*Time.fixedDeltaTime;
+
+        //如果是追踪子弹
+        if (isTracing)
+        {
+            ChangeDirection(target);
+
+        }
+    }
+
+    //改变子弹飞行轨迹，根据目标单位
+    public void ChangeDirection(Transform target)
+    {
+        if (target != null)
+        {
+            dir = (target.position - transform.position).normalized;
+            
+            //改变子弹朝向，目标
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
+        }
+    }
+
+    //初始化
     public void Init(GameObject caster, GameObject target, int damage)
     {
         this.caster = caster;
         this.damage = damage;
+        this.target = target.transform;
         //currentTarget = target.transform;
-        var tempDir = Vector3.Normalize(target.transform.position - this.transform.position);
-        dir = new Vector3(tempDir.x,tempDir.y,0);
+
         startPosition = this.transform.position;
 
-        ////修改子弹的朝向
-        //transform.rotation = Quaternion.LookRotation(dir);
-
+        ChangeDirection(this.target);
+        flyTime = ConvertFlyDistanceToTime(flyDistance, rb.velocity.magnitude);
+        Debug.Log("飞行时间:" + flyDistance + ";" + flyTime);
         isMove = true;
-        //ChangeCurrentDirection(currentTarget);
     }
 
 
+    //除当前目标外，寻找全体随机怪物
     private Enemy FindRandomEnemyNotIncludeTarget(Enemy target)
     {
+        Debug.Log("怪物数量外部------：" + EnemyManager._instance.enemies.Count);
         //TODO 确认怪物生成后是否加入了List 怪物死亡是否移除
-        List<Enemy> enemyList = EnemyManager._instance.enemies;
+        List<Enemy> enemyList = new(EnemyManager._instance.enemies);
+        Debug.Log("怪物数量外部：" + EnemyManager._instance.enemies.Count);
+
         enemyList.Remove(target);
+
+        Debug.Log("怪物数量内部：" + enemyList.Count);
         if (enemyList.Count <= 0)
         {
             return null;
@@ -86,7 +120,25 @@ public class Bullet : MonoBehaviour
         Debug.Log(randomIndex);
         return enemyList[randomIndex];
     }
+    public Vector2 GetRandomDirection()
+    {
+        float angle = Random.Range(0f, 2f * Mathf.PI);
+        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+    }
 
+    private void DestoryOnTime()
+    {
+        flyTime -= Time.fixedDeltaTime;
+        if (flyTime <= 0.0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public float ConvertFlyDistanceToTime(float distance,float speed)
+    {
+        return distance / speed;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -97,20 +149,25 @@ public class Bullet : MonoBehaviour
             character.TakeDamage(damage);
             if (bounceCount > 0)
             {
-                GetComponent<Collider2D>().enabled = false;
+                //GetComponent<Collider2D>().enabled = false;
                 bounceCount--;
                 var tempEnemy = FindRandomEnemyNotIncludeTarget((Enemy)character);
 
                 if (tempEnemy != null)
                 {
+                    target = tempEnemy.transform;
                     print(tempEnemy.name);
-                    var tempDir = (tempEnemy.transform.position - this.transform.position).normalized;
-                    dir = new Vector3(tempDir.x, tempDir.y, 0);
+                    ChangeDirection(target);
+                    flyTime = ConvertFlyDistanceToTime(flyDistance, moveSpeed);
                 }
                 else
                 {
-                    print("未找到怪物，销毁");
-                    Destroy(gameObject);
+                    print("弹射次数大于0时，未找到怪物，向随机方向发射");
+                    dir = GetRandomDirection();
+                    transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
+                    Debug.Log("随机飞行方向:"+dir);
+                    target = null;
+                    flyTime = ConvertFlyDistanceToTime(afterbounceDistance, moveSpeed);
                 }
             }
             else

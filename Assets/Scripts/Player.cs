@@ -66,6 +66,7 @@ public class Player : Character
         
     }
 
+    //远程攻击
     public void RangedAttack()
     {
         if (bullet != null)
@@ -88,6 +89,7 @@ public class Player : Character
         RangedAttack();
     }
 
+    //寻找攻击范围内最近的敌方单位
     public GameObject FindEnemy()
     {
         Collider2D[] results = new Collider2D[findEnemiesAtOneTime];
@@ -104,7 +106,6 @@ public class Player : Character
                 }
             }
         }
-      
         return null;
     }
 

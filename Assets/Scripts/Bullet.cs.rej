@@ -1,0 +1,34 @@
+diff a/Assets/Scripts/Bullet.cs b/Assets/Scripts/Bullet.cs	(rejected hunks)
+@@ -60,23 +60,22 @@
+     {
+         this.caster = caster;
+         this.damage = damage;
+-        currentTarget = target.transform;
++        //currentTarget = target.transform;
++        var tempDir = Vector3.Normalize(target.transform.position - this.transform.position);
++        dir = new Vector3(tempDir.x,tempDir.y,0);
+         startPosition = this.transform.position;
+-        ChangeCurrentDirection(currentTarget);
+-    }
+ 
+-    private Vector2 MoveDirectionPointToPoint(Transform target)
+-    {
++        ////�޸��ӵ��ĳ���
++        //transform.rotation = Quaternion.LookRotation(dir);
+ 
+-        if (target != null)
+-        {
+-            return (target.position - transform.position).normalized;
+-        }
+-        return Vector3.zero;
++        isMove = true;
++        //ChangeCurrentDirection(currentTarget);
+     }
+ 
++
+     private Enemy FindRandomEnemyNotIncludeTarget(Enemy target)
+     {
++        //TODO ȷ�Ϲ������ɺ��Ƿ������List ���������Ƿ��Ƴ�
+         List<Enemy> enemyList = EnemyManager._instance.enemies;
+         enemyList.Remove(target);
+         if (enemyList.Count <= 0)

@@ -27,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3040144590325585643}
-  m_LocalRotation: {x: -0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15811892, y: 0.15811892, z: 0.15811892}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &3040144590325585640
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100,13 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905c215ad53021c4bad8520451291301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  moveSpeed: 20
   damage: 5
   bounceCount: 6
   startPosition: {x: 0, y: 0}
   afterbounceDistance: 99
-  flyDistance: 40
-  isTracing: 1
+  flyDistance: 4
+  isTracing: 0
 --- !u!50 &7508369373002304374
 Rigidbody2D:
   serializedVersion: 4
