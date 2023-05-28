@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 4750316473145037256, guid: d34043ca1ac0f454bbf851f7fc49145b, type: 3}
-  insideRadius: 3
+  insideRadius: 9.5
   outsideRadius: 10
   spawnCD: 1
 --- !u!114 &448530675
