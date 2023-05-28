@@ -106,7 +106,7 @@ public class Bullet : MonoBehaviour
     {
         Debug.Log("怪物数量外部------：" + EnemyManager._instance.enemies.Count);
         //TODO 确认怪物生成后是否加入了List 怪物死亡是否移除
-        List<Enemy> enemyList = new(EnemyManager._instance.enemies);
+        List<Enemy> enemyList = new List<Enemy>(EnemyManager._instance.enemies); 
         Debug.Log("怪物数量外部：" + EnemyManager._instance.enemies.Count);
 
         enemyList.Remove(target);

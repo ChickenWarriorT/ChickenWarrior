@@ -15,19 +15,27 @@ public class Player : Character
     private int findEnemiesAtOneTime = 10;
 
     [SerializeField]
-    private Bullet bullet;
+    private GameObject bullet;
     [SerializeField]
     private float weaponOffsetRange;
+
+    private Vector2 targetPosition;
+
 
     private void Awake()
     {
         TimersManager.SetLoopableTimer(this, AttackCD, AutoAttack);
     }
+
+    private void Start()
+    {
+        targetPosition = transform.position;
+    }
     private void FixedUpdate()
     {
         Move();
     }
-    
+
     public void OnMove(InputAction.CallbackContext context)
     {
         _inputDerection = context.ReadValue<Vector2>();
@@ -45,11 +53,22 @@ public class Player : Character
 
         Vector2 position = transform.position;
         Vector2 moveDir = _inputDerection.normalized;
-
         Vector2 targetPosition = position + moveDir;
+
+        List<float> boundary = MapManager._instance.Boundary;
+        if (boundary != null)
+        {
+            float clampedX = Mathf.Clamp(targetPosition.x, boundary[0], boundary[1]);
+            float clampedY = Mathf.Clamp(targetPosition.y, boundary[3], boundary[2]);
+
+            targetPosition = new Vector2(clampedX, clampedY);
+        }
+
         if (position != targetPosition)
-            rb.DOMove(targetPosition, MoveSpeed).SetSpeedBased();
+            transform.position = Vector2.MoveTowards(position, targetPosition, MoveSpeed*Time.fixedDeltaTime);
+
     }
+
 
 
 
@@ -57,11 +76,12 @@ public class Player : Character
     {
         base.TakeDamage(damage);
         OnHealthChanged.Invoke();
+
     }
 
     public override void DestorySelf()
     {
-        
+
     }
 
     //远程攻击
@@ -74,7 +94,7 @@ public class Player : Character
             {
                 //子弹出生点离角色的距离
                 Vector2 offset = (enemy.transform.position - transform.position).normalized * weaponOffsetRange;
-                Bullet bult=BulletManager._instance.CreateBullet(bullet, offset);
+                Bullet bult = BulletManager._instance.CreateBullet(bullet.GetComponent<Bullet>(), offset);
                 bult.Init(gameObject, enemy, AttakeDamage);
             }
         }
@@ -94,11 +114,11 @@ public class Player : Character
 
         Physics2D.OverlapCircleNonAlloc(transform.position, AttackRange, results);
 
-        if (results!=null)
+        if (results != null)
         {
             foreach (var result in results)
             {
-                if (result!=null&&result.CompareTag("Enemy"))
+                if (result != null && result.CompareTag("Enemy"))
                 {
                     return result.gameObject;
                 }

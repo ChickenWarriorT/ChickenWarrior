@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     private float moveSpeed;
     [SerializeField]
     private int attackRange;
+    [SerializeField]
     protected Rigidbody2D rb;
     [SerializeField]
     private float defaultAttackCD;
@@ -36,13 +37,13 @@ public class Character : MonoBehaviour
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public float DefaultAttackCD { get => defaultAttackCD; set => defaultAttackCD = value; }
 
-    [SerializeField]
-    private UnityEvent OnBeAttacked;
+    //[SerializeField]
+    //protected UnityEvent OnBeAttacked;
     private void Start()
     {
+        rb = this.GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultColor = spriteRenderer.color;
-        rb = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
     {
@@ -82,8 +83,9 @@ public class Character : MonoBehaviour
         health -= damage;
         if (spriteRenderer)
             spriteRenderer.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(_defaultColor);
-        OnBeAttacked.Invoke();
+        //OnBeAttacked.Invoke();
     }
+
 
 
 }

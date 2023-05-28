@@ -138,11 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   attakDamage: 1
-  moveSpeed: 1
+  moveSpeed: 2
   attackRange: 0
+  rb: {fileID: 0}
   defaultAttackCD: 0
   attackSpeed: 0
   attackCD: 0
-  OnBeAttacked:
-    m_PersistentCalls:
-      m_Calls: []

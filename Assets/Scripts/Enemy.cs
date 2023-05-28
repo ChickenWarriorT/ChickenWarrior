@@ -21,8 +21,18 @@ public class Enemy : Character
         Vector2 moveDir = (playerPosition - position).normalized;
 
         Vector2 targetPosition = position + moveDir;
+        List<float> boundary = MapManager._instance.Boundary;
+        if (boundary != null)
+        {
+            float clampedX = Mathf.Clamp(targetPosition.x, boundary[0], boundary[1]);
+            float clampedY = Mathf.Clamp(targetPosition.y, boundary[3], boundary[2]);
+
+            targetPosition = new Vector2(clampedX, clampedY);
+        }
         if (position != targetPosition)
-            rb.DOMove(targetPosition, MoveSpeed).SetSpeedBased();
+            transform.position = Vector2.MoveTowards(position, targetPosition, MoveSpeed * Time.fixedDeltaTime);
+
+
     }
     private void CanCollide()
     {

@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   damage: 5
-  bounceCount: 6
+  bounceCount: 1
   startPosition: {x: 0, y: 0}
   afterbounceDistance: 99
   flyDistance: 4
