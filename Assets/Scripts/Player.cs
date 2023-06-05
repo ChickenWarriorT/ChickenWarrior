@@ -55,14 +55,15 @@ public class Player : Character
         Vector2 moveDir = _inputDerection.normalized;
         Vector2 targetPosition = position + moveDir;
 
-        List<float> boundary = MapManager._instance.Boundary;
-        if (boundary != null)
-        {
-            float clampedX = Mathf.Clamp(targetPosition.x, boundary[0], boundary[1]);
-            float clampedY = Mathf.Clamp(targetPosition.y, boundary[3], boundary[2]);
+        //List<float> boundary = MapManager._instance.Boundary;
+        //if (boundary != null)
+        //{
+        //    float clampedX = Mathf.Clamp(targetPosition.x, boundary[0], boundary[1]);
+        //    float clampedY = Mathf.Clamp(targetPosition.y, boundary[3], boundary[2]);
 
-            targetPosition = new Vector2(clampedX, clampedY);
-        }
+        //    targetPosition = new Vector2(clampedX, clampedY);
+        //}
+        targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
 
         if (position != targetPosition)
             transform.position = Vector2.MoveTowards(position, targetPosition, MoveSpeed*Time.fixedDeltaTime);

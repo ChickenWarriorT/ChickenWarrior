@@ -11,7 +11,7 @@ public class Enemy : Character
     private float _collideCD = 1.0f;
     private void FixedUpdate()
     {
-        Move();
+        //Move();
     }
 
     public void Move()
@@ -21,14 +21,9 @@ public class Enemy : Character
         Vector2 moveDir = (playerPosition - position).normalized;
 
         Vector2 targetPosition = position + moveDir;
-        List<float> boundary = MapManager._instance.Boundary;
-        if (boundary != null)
-        {
-            float clampedX = Mathf.Clamp(targetPosition.x, boundary[0], boundary[1]);
-            float clampedY = Mathf.Clamp(targetPosition.y, boundary[3], boundary[2]);
 
-            targetPosition = new Vector2(clampedX, clampedY);
-        }
+        targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
+
         if (position != targetPosition)
             transform.position = Vector2.MoveTowards(position, targetPosition, MoveSpeed * Time.fixedDeltaTime);
 

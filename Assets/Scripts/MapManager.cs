@@ -31,4 +31,24 @@ public class MapManager : MonoBehaviour
         
     }
 
+    public Vector2 PosRestrainInBoundary(Vector2 pos)
+    {
+        if (boundary != null)
+        {
+            float clampedX = Mathf.Clamp(pos.x, boundary[0], boundary[1]);
+            float clampedY = Mathf.Clamp(pos.y, boundary[3], boundary[2]);
+
+            return new Vector2(clampedX, clampedY);
+        }
+
+        return Vector2.zero;
+    }
+
+    public bool IsInsideBoundary(Vector2 pos)
+    {
+
+
+        return false;
+    }
+
 }

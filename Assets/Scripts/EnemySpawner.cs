@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
     private float outsideRadius;
     [SerializeField]
     private float spawnCD;
+    [SerializeField]
+    private float spawnOffSet;
     int count=0;
 
     private float time = 1.0f;
@@ -80,8 +82,8 @@ public class EnemySpawner : MonoBehaviour
 
         while (!isValidPosition && attemptCount < maxAttempts)
         {
-            float randomX = Random.Range(boundary[0], boundary[1]);
-            float randomY = Random.Range(boundary[3], boundary[2]);
+            float randomX = Random.Range(boundary[0]+ spawnOffSet, boundary[1]- spawnOffSet);
+            float randomY = Random.Range(boundary[3]+ spawnOffSet, boundary[2]- spawnOffSet);
             randomPos = new Vector2(randomX, randomY);
 
             if (inRadius <= Vector2.Distance(randomPos, playerPos)
