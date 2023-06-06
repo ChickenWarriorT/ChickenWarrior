@@ -15,7 +15,8 @@ public class EnemySpawner : MonoBehaviour
     private float spawnCD;
     [SerializeField]
     private float spawnOffSet;
-    int count=0;
+    private float outRadiusStep = 1.0f;
+    int count = 0;
 
     private float time = 1.0f;
 
@@ -46,11 +47,15 @@ public class EnemySpawner : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            
+
             print("生成怪物。。。。。。");
-            SpawnInRecPosition(insideRadius, outsideRadius);
+            for (int i = 0; i < 100; i++)
+            {
+                SpawnInRecPosition(insideRadius, outsideRadius);
+            }
             
-            print("怪物数量--------------："+count);
+
+            print("怪物数量--------------：" + count);
             count = 0;
             time = spawnCD;
         }
@@ -69,9 +74,11 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    //随机生成怪物，在以自身为圆心，大于inRadius半径的圆，小于outRadius半径的圆的区域内，且在一个固定范围内
     Vector2 randomPos;
     public void SpawnInRecPosition(float inRadius, float outRadius)
     {
+
         List<float> boundary = MapManager._instance.Boundary;
 
         bool isValidPosition = false;
@@ -80,26 +87,42 @@ public class EnemySpawner : MonoBehaviour
         int attemptCount = 0;
         Vector2 playerPos = PlayerManager._instance.player.transform.position;
 
+
         while (!isValidPosition && attemptCount < maxAttempts)
         {
-            float randomX = Random.Range(boundary[0]+ spawnOffSet, boundary[1]- spawnOffSet);
-            float randomY = Random.Range(boundary[3]+ spawnOffSet, boundary[2]- spawnOffSet);
+            float randomX = Random.Range(boundary[0] + spawnOffSet, boundary[1] - spawnOffSet);
+            float randomY = Random.Range(boundary[3] + spawnOffSet, boundary[2] - spawnOffSet);
             randomPos = new Vector2(randomX, randomY);
 
             if (inRadius <= Vector2.Distance(randomPos, playerPos)
                 && Vector2.Distance(randomPos, playerPos) <= outRadius)
             {
                 isValidPosition = true;
-                count++;
+
             }
             attemptCount++;
         }
-
-        if (isValidPosition)
+        //如果多次尝试没有找到合适的位置，则增加外圈范围
+        while (!isValidPosition)
         {
-            Enemy e = Instantiate(enemy, randomPos, Quaternion.identity);
-            EnemyManager._instance.enemies.Add(e);
+            //增加外圈范围
+            outRadius += outRadiusStep; 
+
+            float randomX = Random.Range(boundary[0] + spawnOffSet, boundary[1] - spawnOffSet);
+            float randomY = Random.Range(boundary[3] + spawnOffSet, boundary[2] - spawnOffSet);
+            randomPos = new Vector2(randomX, randomY);
+
+            if (inRadius <= Vector2.Distance(randomPos, playerPos)
+                && Vector2.Distance(randomPos, playerPos) <= outRadius)
+            {
+                isValidPosition = true;
+            }
         }
 
+        Enemy e = Instantiate(enemy, randomPos, Quaternion.identity);
+        EnemyManager._instance.enemies.Add(e);
+        count++;
     }
+
 }
+
