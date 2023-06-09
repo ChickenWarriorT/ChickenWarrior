@@ -9,10 +9,13 @@ public class Enemy : Character
 {
     private bool _canCollide=true;
     private float _collideCD = 1.0f;
-    private MonsterAIManager monsterAI;
+    private MonsterAI monsterAI;
+
+    [SerializeField]
+    private MovementType movementType;
     private void Awake()
     {
-        monsterAI = GetComponent<MonsterAIManager>();
+        monsterAI = new MonsterAI(movementType, transform);
     }
 
     private void FixedUpdate()

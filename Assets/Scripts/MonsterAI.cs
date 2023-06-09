@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterAIManager : MonoBehaviour
+public class MonsterAI 
 {
-    [SerializeField]
     private MonsterMovement movementAI;
 
     private ISkillAI skillAI;
 
-    private void Start()
-    {
-       
-        
-    }
+    private MovementType movementType;
 
-    private void FixedUpdate()
+    //构造
+    public MonsterAI(MovementType mType, Transform transform)
     {
-        // 更新怪物的行为
-        //Move();
-        //UseSkill();
+        Init(mType, transform);
     }
-
+    
+    //初始化
+    public void Init(MovementType mType, Transform transform)
+    {
+        //初始化移动AI
+        movementType = mType;
+        movementAI = new MonsterMovement(mType, transform);
+    }
     public void Move()
     {
         if (movementAI != null)
@@ -29,7 +30,6 @@ public class MonsterAIManager : MonoBehaviour
             movementAI.Move();
         }
     }
-
     private void UseSkill()
     {
         if (skillAI != null)

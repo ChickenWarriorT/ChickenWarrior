@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 4750316473145037262}
   - component: {fileID: 4750316473145037257}
   - component: {fileID: 4750316473145037256}
-  - component: {fileID: 4722995735687735602}
-  - component: {fileID: -6841149482053237261}
   m_Layer: 0
   m_Name: Enemy_Chasing
   m_TagString: Enemy
@@ -146,29 +144,4 @@ MonoBehaviour:
   defaultAttackCD: 0
   attackSpeed: 0
   attackCD: 0
---- !u!114 &4722995735687735602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4750316473145037263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4f042f527d50948b6614c2600ffe5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementAI: {fileID: -6841149482053237261}
---- !u!114 &-6841149482053237261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4750316473145037263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e049afae48afa49b9c1b56ef2bc468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   movementType: 1
