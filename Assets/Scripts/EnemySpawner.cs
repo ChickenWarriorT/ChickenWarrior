@@ -6,7 +6,9 @@ public class EnemySpawner : MonoBehaviour
 {
 
     [SerializeField]
-    private Enemy enemy;
+    private GameObject enemyChasing;
+    [SerializeField]
+    private GameObject enemyReflect;
     [SerializeField]
     private float insideRadius;
     [SerializeField]
@@ -42,19 +44,29 @@ public class EnemySpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             print("生成怪物。。。。。。");
-            SpawnInRandomInPosition(insideRadius, outsideRadius);
+            SpawnInRandomInPosition(enemyChasing,insideRadius, outsideRadius);
             time = spawnCD;
         }
+        //按R生成追踪怪物
         if (Input.GetKeyDown(KeyCode.R))
         {
-
             print("生成怪物。。。。。。");
             for (int i = 0; i < 100; i++)
             {
-                SpawnInRecPosition(insideRadius, outsideRadius);
+                SpawnInRecPosition(enemyChasing,insideRadius, outsideRadius);
             }
-            
-
+            print("怪物数量--------------：" + count);
+            count = 0;
+            time = spawnCD;
+        }
+        //按R生成反射怪物
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            print("生成怪物。。。。。。");
+            for (int i = 0; i < 100; i++)
+            {
+                SpawnInRecPosition(enemyReflect, insideRadius, outsideRadius);
+            }
             print("怪物数量--------------：" + count);
             count = 0;
             time = spawnCD;
@@ -62,21 +74,21 @@ public class EnemySpawner : MonoBehaviour
     }
 
     //随机生成怪物，在以自身为圆心，大于inRadius半径的圆，小于outRadius半径的圆的区域内
-    public void SpawnInRandomInPosition(float inRadius, float outRadius)
+    public void SpawnInRandomInPosition(GameObject enemy,float inRadius, float outRadius)
     {
 
         Vector2 p = Random.insideUnitCircle * outRadius;
         Vector2 pos = p.normalized * (inRadius + p.magnitude);
         Vector2 relatePos = pos + (Vector2)PlayerManager._instance.player.transform.position;
 
-        Enemy e = Instantiate(enemy, relatePos, Quaternion.identity);
+        Enemy e = Instantiate(enemy, relatePos, Quaternion.identity).GetComponent<Enemy>();
         EnemyManager._instance.enemies.Add(e);
 
     }
 
     //随机生成怪物，在以自身为圆心，大于inRadius半径的圆，小于outRadius半径的圆的区域内，且在一个固定范围内
     Vector2 randomPos;
-    public void SpawnInRecPosition(float inRadius, float outRadius)
+    public void SpawnInRecPosition(GameObject enemy,float inRadius, float outRadius)
     {
 
         List<float> boundary = MapManager._instance.Boundary;
@@ -119,7 +131,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        Enemy e = Instantiate(enemy, randomPos, Quaternion.identity);
+        Enemy e = Instantiate(enemy, randomPos, Quaternion.identity).GetComponent<Enemy>();
         EnemyManager._instance.enemies.Add(e);
         count++;
     }

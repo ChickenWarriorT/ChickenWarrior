@@ -9,25 +9,20 @@ public class Enemy : Character
 {
     private bool _canCollide=true;
     private float _collideCD = 1.0f;
+    private MonsterAIManager monsterAI;
+    private void Awake()
+    {
+        monsterAI = GetComponent<MonsterAIManager>();
+    }
+
     private void FixedUpdate()
     {
-        //Move();
+        Move();
     }
 
     public void Move()
     {
-        Vector2 playerPosition = PlayerManager._instance.PlayerPosition;
-        Vector2 position = transform.position;
-        Vector2 moveDir = (playerPosition - position).normalized;
-
-        Vector2 targetPosition = position + moveDir;
-
-        targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
-
-        if (position != targetPosition)
-            transform.position = Vector2.MoveTowards(position, targetPosition, MoveSpeed * Time.fixedDeltaTime);
-
-
+        monsterAI.Move();
     }
     private void CanCollide()
     {
