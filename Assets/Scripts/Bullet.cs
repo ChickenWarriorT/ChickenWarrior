@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+public enum BulletType
+{
+    Bullet01,
+    Bullet02
+}
 public class Bullet : MonoBehaviour
 {
+    [SerializeField]
+    private BulletType bulletType;
     private Transform currentTarget;
 
     /// <summary>
@@ -23,6 +30,7 @@ public class Bullet : MonoBehaviour
 
     [SerializeField]
     private int bounceCount;
+    private int leftBounce;
 
     [SerializeField]
     private Vector2 startPosition;
@@ -37,8 +45,6 @@ public class Bullet : MonoBehaviour
 
     private float currentFlyDistance;
 
-    private GameObject caster;
-
     [SerializeField]
     private bool isTracing;
 
@@ -48,7 +54,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         //Destroy(this.gameObject, 10);
-        flyTime = ConvertFlyDistanceToTime(flyDistance,moveSpeed);
+        flyTime = ConvertFlyDistanceToTime(flyDistance, moveSpeed);
     }
 
     private void FixedUpdate()
@@ -62,7 +68,7 @@ public class Bullet : MonoBehaviour
     {
         DestoryOnTime();
         //fixedupdate每秒50帧，所以乘以50
-        rb.velocity = dir * moveSpeed*50*Time.fixedDeltaTime;
+        rb.velocity = dir * moveSpeed * 50 * Time.fixedDeltaTime;
 
         //如果是追踪子弹
         if (isTracing)
@@ -78,22 +84,21 @@ public class Bullet : MonoBehaviour
         if (target != null)
         {
             dir = (target.position - transform.position).normalized;
-            
+
             //改变子弹朝向，目标
             transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
         }
     }
 
     //初始化
-    public void Init(GameObject caster, GameObject target, int damage)
+    public void Init(Vector2 startPos, GameObject target, int damage)
     {
-        this.caster = caster;
         this.damage = damage;
         this.target = target.transform;
         //currentTarget = target.transform;
 
-        startPosition = this.transform.position;
-
+        transform.position = startPos;
+        leftBounce = bounceCount;
         ChangeDirection(this.target);
         flyTime = ConvertFlyDistanceToTime(flyDistance, rb.velocity.magnitude);
         Debug.Log("飞行时间:" + flyDistance + ";" + flyTime);
@@ -102,12 +107,12 @@ public class Bullet : MonoBehaviour
 
 
     //除当前目标外，寻找全体随机怪物
-    private Enemy FindRandomEnemyNotIncludeTarget(Enemy target)
+    private Monster FindRandomEnemyNotIncludeTarget(Monster target)
     {
-        Debug.Log("怪物数量外部------：" + EnemyManager._instance.enemies.Count);
+        Debug.Log("怪物数量外部------：" + MonsterManager._instance.monsters.Count);
         //TODO 确认怪物生成后是否加入了List 怪物死亡是否移除
-        List<Enemy> enemyList = new List<Enemy>(EnemyManager._instance.enemies); 
-        Debug.Log("怪物数量外部：" + EnemyManager._instance.enemies.Count);
+        List<Monster> enemyList = new List<Monster>(MonsterManager._instance.monsters);
+        Debug.Log("怪物数量外部：" + MonsterManager._instance.monsters.Count);
 
         enemyList.Remove(target);
 
@@ -134,12 +139,12 @@ public class Bullet : MonoBehaviour
         flyTime -= Time.fixedDeltaTime;
         if (flyTime <= 0.0f)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     //飞行距离，根据速度转换成时间
-    public float ConvertFlyDistanceToTime(float distance,float speed)
+    public float ConvertFlyDistanceToTime(float distance, float speed)
     {
         return distance / speed;
     }
@@ -151,13 +156,13 @@ public class Bullet : MonoBehaviour
         {
             Character character = other.GetComponent<Character>();
             character.TakeDamage(damage);
-            if (bounceCount > 0)
+            if (leftBounce > 0)
             {
                 //GetComponent<Collider2D>().enabled = false;
-                bounceCount--;
-                var tempEnemy = FindRandomEnemyNotIncludeTarget((Enemy)character);
+                leftBounce--;
+                var tempEnemy = FindRandomEnemyNotIncludeTarget((Monster)character);
 
-                if (tempEnemy != null)
+                if (tempEnemy != null)//&& tempEnemy.gameObject.activeSelf == true
                 {
                     target = tempEnemy.transform;
                     print(tempEnemy.name);
@@ -170,7 +175,7 @@ public class Bullet : MonoBehaviour
                     print("弹射次数大于0时，未找到怪物，向随机方向发射");
                     dir = GetRandomDirection();
                     transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
-                    Debug.Log("随机飞行方向:"+dir);
+                    Debug.Log("随机飞行方向:" + dir);
                     target = null;
                     //修改飞行时间为最大飞行时间
                     flyTime = ConvertFlyDistanceToTime(afterbounceDistance, moveSpeed);
@@ -179,7 +184,7 @@ public class Bullet : MonoBehaviour
             else
             {
                 print("弹跳次数不足，销毁子弹。");
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }

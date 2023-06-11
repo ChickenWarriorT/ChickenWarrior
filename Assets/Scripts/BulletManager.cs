@@ -10,9 +10,5 @@ public class BulletManager : MonoBehaviour
     {
         _instance = this;
     }
-    public Bullet CreateBullet(Bullet bullet,Vector2 offset)
-    {
-        Bullet bult = (Bullet)Instantiate(bullet, (Vector2)PlayerManager._instance.player.transform.position+ offset, Quaternion.identity);
-        return bult;
-    }
+
 }

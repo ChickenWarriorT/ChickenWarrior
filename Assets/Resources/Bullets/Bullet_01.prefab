@@ -100,9 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905c215ad53021c4bad8520451291301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletType: 0
   moveSpeed: 20
   damage: 5
-  bounceCount: 1
+  bounceCount: 100
   startPosition: {x: 0, y: 0}
   afterbounceDistance: 99
   flyDistance: 4

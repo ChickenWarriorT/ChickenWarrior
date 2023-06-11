@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterAI 
+
+public class MonsterAI
 {
     private MonsterMovement movementAI;
 
@@ -15,7 +16,7 @@ public class MonsterAI
     {
         Init(mType, transform);
     }
-    
+
     //≥ı ºªØ
     public void Init(MovementType mType, Transform transform)
     {

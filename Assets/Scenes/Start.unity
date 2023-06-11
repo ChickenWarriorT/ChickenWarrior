@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 448530676}
   - component: {fileID: 448530677}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -548,10 +548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bc170582d05ff4cb955d5199cc502a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyChasing: {fileID: 4750316473145037263, guid: d34043ca1ac0f454bbf851f7fc49145b,
-    type: 3}
-  enemyReflect: {fileID: 4750316473145037263, guid: 4a7428c99952e4b489266ea22b265287,
-    type: 3}
   insideRadius: 10
   outsideRadius: 15
   spawnCD: 1
@@ -568,9 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fecedb1c6d8144dae43dfdae9293ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 0}
-  - {fileID: 0}
+  monsters: []
 --- !u!114 &448530676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,10 +590,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 448530669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff4f042f527d50948b6614c2600ffe5d, type: 3}
+  m_Script: {fileID: 11500000, guid: cdc2ba3413f231f41baa581f7813747c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementType: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,7 +1044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa0d1019ebff5242bd97d931e36a94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  maxHealth: 20
   attakDamage: 2
   moveSpeed: 10
   attackRange: 10
@@ -1074,7 +1067,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  bullet: {fileID: 3040144590325585643, guid: a67438f0f6f5cfb468276b19d48492f7, type: 3}
+  bulletSpawner: {fileID: 448530677}
+  bulletType: 0
   weaponOffsetRange: 1
 --- !u!58 &939732673
 CircleCollider2D:
@@ -13874,7 +13868,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2040824096
 MonoBehaviour:
@@ -13948,7 +13942,66 @@ Transform:
   - {fileID: 1195613318}
   - {fileID: 1233550540}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2075204436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2075204438}
+  - component: {fileID: 2075204437}
+  m_Layer: 0
+  m_Name: ObjectPools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2075204437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075204436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51a75b668f0f7f428b96a971c0f7750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolTransform: {fileID: 2075204438}
+  monsterConfigs:
+  - type: 0
+    prefab: {fileID: 4750316473145037263, guid: d34043ca1ac0f454bbf851f7fc49145b,
+      type: 3}
+    initialSize: 10
+  - type: 1
+    prefab: {fileID: 4750316473145037263, guid: 4a7428c99952e4b489266ea22b265287,
+      type: 3}
+    initialSize: 10
+  bulletConfigs:
+  - type: 0
+    prefab: {fileID: 3040144590325585643, guid: a67438f0f6f5cfb468276b19d48492f7,
+      type: 3}
+    initialSize: 10
+--- !u!4 &2075204438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075204436}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -22.98843, y: 3.5688205, z: -0.17146029}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5433912932151284512
 PrefabInstance:

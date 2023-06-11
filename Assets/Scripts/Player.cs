@@ -15,7 +15,9 @@ public class Player : Character
     private int findEnemiesAtOneTime = 10;
 
     [SerializeField]
-    private GameObject bullet;
+    private BulletSpawner bulletSpawner;
+    [SerializeField]
+    private BulletType bulletType;
     [SerializeField]
     private float weaponOffsetRange;
 
@@ -30,10 +32,17 @@ public class Player : Character
     private void Start()
     {
         targetPosition = transform.position;
+        Init();
     }
     private void FixedUpdate()
     {
         Move();
+    }
+
+    public void Init()
+    {
+        CurrentHealth = MaxHealth;
+        OnHealthChanged.Invoke();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -66,7 +75,7 @@ public class Player : Character
         targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
 
         if (position != targetPosition)
-            transform.position = Vector2.MoveTowards(position, targetPosition, MoveSpeed*Time.fixedDeltaTime);
+            transform.position = Vector2.MoveTowards(position, targetPosition, MoveSpeed * Time.fixedDeltaTime);
 
     }
 
@@ -88,15 +97,14 @@ public class Player : Character
     //远程攻击
     public void RangedAttack()
     {
-        if (bullet != null)
+        if (bulletSpawner != null)
         {
             GameObject enemy = FindEnemy();
             if (enemy != null)
             {
                 //子弹出生点离角色的距离
                 Vector2 offset = (enemy.transform.position - transform.position).normalized * weaponOffsetRange;
-                Bullet bult = BulletManager._instance.CreateBullet(bullet.GetComponent<Bullet>(), offset);
-                bult.Init(gameObject, enemy, AttakeDamage);
+                bulletSpawner.SpawnBullet(bulletType, (Vector2)transform.position + offset, enemy, AttakeDamage);
             }
         }
     }

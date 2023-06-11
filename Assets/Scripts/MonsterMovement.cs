@@ -51,7 +51,7 @@ public class MonsterMovement
         targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
 
         if (position != targetPosition)
-            monsterTransform.position = Vector2.MoveTowards(position, targetPosition, monsterTransform.GetComponent<Enemy>().MoveSpeed * Time.fixedDeltaTime);
+            monsterTransform.position = Vector2.MoveTowards(position, targetPosition, monsterTransform.GetComponent<Monster>().MoveSpeed * Time.fixedDeltaTime);
     }
     private void MovementReflect()
     {
@@ -63,7 +63,7 @@ public class MonsterMovement
         targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
 
         if (position != targetPosition)
-            monsterTransform.position = Vector2.MoveTowards(position, targetPosition, monsterTransform.GetComponent<Enemy>().MoveSpeed * Time.fixedDeltaTime);
+            monsterTransform.position = Vector2.MoveTowards(position, targetPosition, monsterTransform.GetComponent<Monster>().MoveSpeed * Time.fixedDeltaTime);
 
         //检测是否在地图边界
         if (Utilities.IsAtBoundary(monsterTransform, distanceDetectBoundary, out normalVector))

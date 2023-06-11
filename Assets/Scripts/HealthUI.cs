@@ -10,12 +10,12 @@ public class HealthUI : MonoBehaviour
 
     private void Awake()
     {
-        healthBar.maxValue = PlayerManager._instance.player.Health;
-        healthBar.value= PlayerManager._instance.player.Health;
+        healthBar.maxValue = PlayerManager._instance.player.MaxHealth;
+        healthBar.value= PlayerManager._instance.player.CurrentHealth;
     }
 
     public void UpdateHealthUI()
     {
-        healthBar.value = PlayerManager._instance.player.Health;
+        healthBar.value = PlayerManager._instance.player.CurrentHealth;
     }
 }
