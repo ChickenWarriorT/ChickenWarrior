@@ -23,12 +23,12 @@ public class Monster : Character
     private MovementType movementType;
     private void Awake()
     {
-        monsterAI = new MonsterAI(movementType, transform);
+        //monsterAI = new MonsterAI(movementType, transform);
     }
 
     private void FixedUpdate()
     {
-        Move();
+        //Move();
     }
 
     public void Init(Vector2 pos)

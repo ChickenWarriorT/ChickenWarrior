@@ -54,6 +54,13 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float detectDistance = 0.01f;
 
+    // 设定子弹的速度和半径增长速度
+    public float speed = 5f;
+    public float radiusIncreaseRate = 1f;
+
+    // 记录子弹的角度和半径
+    private float angle = 0f;
+    private float radius = 0f;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -65,7 +72,37 @@ public class Bullet : MonoBehaviour
     {
         Move();
     }
+    private void OnEnable()
+    {
+        //StartMoving();
+    }
 
+
+
+    //public void StartMoving()
+    //    {
+    //        StartCoroutine(MoveInCircle());
+    //    }
+
+    //    IEnumerator MoveInCircle()
+    //    {
+    //        // 每一帧更新子弹的位置
+    //        while (true)
+    //        {
+    //            // 计算新的半径和角度
+    //            radius += radiusIncreaseRate * Time.deltaTime;
+    //            angle += speed * Time.deltaTime;
+
+    //            // 计算新的位置
+    //            Vector3 newPos = new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0);
+
+    //            // 更新子弹的位置
+    //            transform.position = newPos;
+
+    //            yield return null;
+    //        }
+    //    }
+    
 
     //子弹移动
     private void Move()
