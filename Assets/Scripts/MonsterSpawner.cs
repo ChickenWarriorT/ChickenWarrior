@@ -79,6 +79,7 @@ public class MonsterSpawner : MonoBehaviour
         //Monster e = Instantiate(type, relatePos, Quaternion.identity).GetComponent<Monster>();
         Monster monster = ObjectPoolManager._instance.GetMonster(type);
         MonsterManager._instance.monsters.Add(monster);
+        monster.Init(relatePos);
         monster.gameObject.SetActive(true);
 
     }

@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef63dd15c2aa33545a66a7a438550a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 1000
   attakDamage: 1
   moveSpeed: 5
   attackRange: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   defaultAttackCD: 0
   attackSpeed: 0
   attackCD: 0
-  safeDistance: 2
+  safeDistance: 5
   monsterType: 0
   movementType: 1
 --- !u!114 &8041550975049072908

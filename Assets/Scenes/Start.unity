@@ -1050,7 +1050,7 @@ MonoBehaviour:
   attackRange: 10
   rb: {fileID: 939732670}
   defaultAttackCD: 10
-  attackSpeed: 50
+  attackSpeed: 2
   attackCD: 2
   OnHealthChanged:
     m_PersistentCalls:

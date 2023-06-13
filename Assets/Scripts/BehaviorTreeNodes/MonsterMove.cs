@@ -11,21 +11,28 @@ public class MonsterMove : Action
     private float distanceDetectBoundary = 2.0f;
     private Vector2 direction;
     private Vector2 normalVector;
-
+    private bool fixedUpdating = true;
     public override void OnAwake()
     {
         Init();
         base.OnAwake();
     }
-    public override TaskStatus OnUpdate()
-    {
-        Move();
-        return TaskStatus.Success;
-    }
     public override void OnFixedUpdate()
     {
-        //Move();
+        Move();
+        fixedUpdating = false;
     }
+    public override TaskStatus OnUpdate()
+    {
+        if (!fixedUpdating)
+        {
+            fixedUpdating = true;
+            return TaskStatus.Success;
+        }
+        else
+            return TaskStatus.Running;
+    }
+
 
 
 
