@@ -145,7 +145,8 @@ MonoBehaviour:
   defaultAttackCD: 0
   attackSpeed: 0
   attackCD: 0
-  monsterType: 0
+  safeDistance: 2
+  monsterType: 1
   movementType: 2
 --- !u!114 &867293139769377370
 MonoBehaviour:

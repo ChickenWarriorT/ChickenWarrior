@@ -145,6 +145,7 @@ MonoBehaviour:
   defaultAttackCD: 0
   attackSpeed: 0
   attackCD: 0
+  safeDistance: 2
   monsterType: 0
   movementType: 1
 --- !u!114 &8041550975049072908
@@ -166,7 +167,7 @@ MonoBehaviour:
   logTaskChanges: 0
   group: 0
   resetValuesOnRestart: 0
-  externalBehavior: {fileID: 0}
+  externalBehavior: {fileID: 11400000, guid: 14821b9fd54a1bf45b8526d85466310f, type: 2}
   mBehaviorSource:
     behaviorName: Behavior
     behaviorDescription: 
@@ -175,7 +176,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(741,178)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"MonsterMove","NodeData":{"Offset":"(-10,185.555542)"},"ID":1,"Name":"Monster
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(741,178)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"MonsterMove","NodeData":{"Offset":"(-52.0258446,280.921844)"},"ID":1,"Name":"Monster
         Move","Instant":true,"MovementTypemovementType":"Chasing"},"DetachedTasks":[{"Type":"BehaviorTreeNode","NodeData":{"Offset":"(698.2344,587.819458)"},"ID":2,"Name":"Behavior
         Tree Node","Instant":true,"SharedInttestInt":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0}}]}'
       fieldSerializationData:

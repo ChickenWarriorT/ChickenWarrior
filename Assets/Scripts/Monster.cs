@@ -14,13 +14,20 @@ public class Monster : Character
 {
     private bool _canCollide=true;
     private float _collideCD = 1.0f;
-    
-    private MonsterAI monsterAI=null;
 
+    //°²È«¾àÀë
+    [SerializeField]
+    private float safeDistance;
+
+
+    //private MonsterAI monsterAI=null;
     [SerializeField]
     private MonsterType monsterType;
     [SerializeField]
     private MovementType movementType;
+
+    public float SafeDistance { get => safeDistance; set => safeDistance = value; }
+
     private void Awake()
     {
         //monsterAI = new MonsterAI(movementType, transform);
@@ -39,7 +46,7 @@ public class Monster : Character
 
     public void Move()
     {
-        monsterAI.Move();
+        //monsterAI.Move();
     }
     private void CanCollide()
     {

@@ -19,11 +19,12 @@ public class MonsterMove : Action
     }
     public override TaskStatus OnUpdate()
     {
-        return TaskStatus.Running;
+        Move();
+        return TaskStatus.Success;
     }
     public override void OnFixedUpdate()
     {
-        Move();
+        //Move();
     }
 
 
