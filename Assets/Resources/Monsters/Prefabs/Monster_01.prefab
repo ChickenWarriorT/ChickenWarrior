@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   attakDamage: 1
-  moveSpeed: 5
+  moveSpeed: 1
   attackRange: 0
   rb: {fileID: 0}
   defaultAttackCD: 0

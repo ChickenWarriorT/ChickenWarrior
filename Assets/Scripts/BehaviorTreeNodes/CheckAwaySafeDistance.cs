@@ -8,7 +8,8 @@ using BehaviorDesigner.Runtime.Tasks;
 public class CheckAwaySafeDistance : Conditional
 {
     private float awayDistance;
-    private float offSet = 1f;
+    private float offSet = 0.2f;
+
     public override void OnAwake()
     {
         awayDistance = GetComponent<Monster>().SafeDistance - offSet;
@@ -17,11 +18,9 @@ public class CheckAwaySafeDistance : Conditional
     public override TaskStatus OnUpdate()
     {
         float distance = Vector2.Distance(transform.position, PlayerManager._instance.player.transform.position);
-        
-        if ( distance < awayDistance ||distance < GetComponent<Monster>().SafeDistance)
+        if (distance < awayDistance || distance < GetComponent<Monster>().SafeDistance)
         {
-            
-            return TaskStatus.Success;
+            return TaskStatus.Success;//11
         }
         else
         {
@@ -30,8 +29,8 @@ public class CheckAwaySafeDistance : Conditional
     }
     public override void OnFixedUpdate()
     {
-       
+
     }
 
-  
+
 }
