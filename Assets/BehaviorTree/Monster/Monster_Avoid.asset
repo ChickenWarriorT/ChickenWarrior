@@ -25,9 +25,7 @@ MonoBehaviour:
         Safe Distance","Instant":true,"DistanceCheckTypecheckType":"LessThanAwayDistance"},{"Type":"MoveAway","NodeData":{"Offset":"(122.039,297.9798)"},"ID":7,"Name":"Move
         Away","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(395.246338,117.982376)"},"ID":8,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CheckSafeDistance","NodeData":{"Offset":"(-206.552063,282.7586)","Comment":"\u662f\u5426\u5927\u4e8e\u5b89\u5168\u8ddd\u79bb"},"ID":9,"Name":"Check
         Safe Distance","Instant":true,"DistanceCheckTypecheckType":"GreaterThanSafeDistance"},{"Type":"MonsterMove","NodeData":{"Offset":"(81.55214,273.254822)"},"ID":10,"Name":"Monster
-        Move","Instant":true,"MovementTypemovementType":"Chasing"}]}]}]},"DetachedTasks":[{"Type":"CheckInSafeDistance","NodeData":{"Offset":"(-133.180542,544.5766)"},"ID":11,"Name":"Check
-        In Safe Distance","Instant":true},{"Type":"CheckAwaySafeDistance","NodeData":{"Offset":"(-84.2511,1076.54993)"},"ID":12,"Name":"Check
-        Away Safe Distance","Instant":true}]}'
+        Move","Instant":true,"MovementTypemovementType":"Chasing"}]}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
