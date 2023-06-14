@@ -27,6 +27,7 @@ public class Monster : Character
     private MovementType movementType;
 
     public float SafeDistance { get => safeDistance; set => safeDistance = value; }
+    public float AwayDistance { get => Mathf.Clamp(safeDistance-0.1f,0.0f,safeDistance); }
 
     private void Awake()
     {

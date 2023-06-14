@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23f08d2ae4cba14087c1ed36193d82b, type: 3}
+  m_Name: Monster_Avoid
+  m_EditorClassIdentifier: 
+  mBehaviorSource:
+    behaviorName: Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(738.7174,36.5182877)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-54.054245,203.51358)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":1},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-128.732025,172.727264)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-478.181854,175.454514)"},"ID":3,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CheckSafeDistance","NodeData":{"Offset":"(-127.878662,209.697021)","Comment":"\u662f\u5426\u5927\u4e8e\u56de\u907f\u8ddd\u79bb\u4e14\u5c0f\u4e8e\u5b89\u5168\u8ddd\u79bb"},"ID":4,"Name":"Check
+        Safe Distance","Instant":true,"DistanceCheckTypecheckType":"GreaterThanAwayLessThanSafe"}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-173.55806,122.628357)"},"ID":5,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CheckSafeDistance","NodeData":{"Offset":"(-161.610352,290.7668)","Comment":"\u662f\u5426\u5c0f\u4e8e\u56de\u907f\u8ddd\u79bb"},"ID":6,"Name":"Check
+        Safe Distance","Instant":true,"DistanceCheckTypecheckType":"LessThanAwayDistance"},{"Type":"MoveAway","NodeData":{"Offset":"(122.039,297.9798)"},"ID":7,"Name":"Move
+        Away","Instant":true}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(395.246338,117.982376)"},"ID":8,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CheckSafeDistance","NodeData":{"Offset":"(-206.552063,282.7586)","Comment":"\u662f\u5426\u5927\u4e8e\u5b89\u5168\u8ddd\u79bb"},"ID":9,"Name":"Check
+        Safe Distance","Instant":true,"DistanceCheckTypecheckType":"GreaterThanSafeDistance"},{"Type":"MonsterMove","NodeData":{"Offset":"(81.55214,273.254822)"},"ID":10,"Name":"Monster
+        Move","Instant":true,"MovementTypemovementType":"Chasing"}]}]}]},"DetachedTasks":[{"Type":"CheckInSafeDistance","NodeData":{"Offset":"(-133.180542,544.5766)"},"ID":11,"Name":"Check
+        In Safe Distance","Instant":true},{"Type":"CheckAwaySafeDistance","NodeData":{"Offset":"(-84.2511,1076.54993)"},"ID":12,"Name":"Check
+        Away Safe Distance","Instant":true}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.1
