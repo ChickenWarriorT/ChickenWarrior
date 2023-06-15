@@ -39,7 +39,7 @@ public class MonsterSpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             print("生成怪物。。。。。。");
-            SpawnInRandomInPosition(MonsterType.Monster01,insideRadius, outsideRadius);
+            SpawnInRandomInPosition(MonsterType.SkullReaper, insideRadius, outsideRadius);
             time = spawnCD;
         }
         //按R生成追踪怪物
@@ -48,7 +48,7 @@ public class MonsterSpawner : MonoBehaviour
             print("生成怪物。。。。。。");
             for (int i = 0; i < 100; i++)
             {
-                SpawnInRecPosition(MonsterType.Monster01, insideRadius, outsideRadius);
+                SpawnInRecPosition(MonsterType.SkullReaper, insideRadius, outsideRadius);
             }
             print("怪物数量--------------：" + count);
             count = 0;

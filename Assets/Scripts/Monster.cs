@@ -6,8 +6,8 @@ using Timers;
 using System;
 
 public enum MonsterType
-{ 
-    Monster01,
+{
+    SkullReaper,
     Monster02
 }
 public class Monster : Character
@@ -75,6 +75,10 @@ public class Monster : Character
         }
     }
 
+    public override void Die()
+    {
+        base.Die();
+    }
     public override void DestorySelf()
     {
         MonsterManager._instance.monsters.Remove(this);

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
-    protected SpriteRenderer spriteRenderer;
+    protected SpriteRenderer[] spriteRenderers;
     //最大血量
     [SerializeField]
     private int maxHealth;
@@ -33,7 +33,6 @@ public class Character : MonoBehaviour
     [SerializeField]
     private float attackCD;
 
-    private Color _defaultColor;
 
     public int MaxHealth { get => maxHealth; }
     public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
@@ -46,15 +45,22 @@ public class Character : MonoBehaviour
     }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public float DefaultAttackCD { get => defaultAttackCD; set => defaultAttackCD = value; }
-    
 
-    //[SerializeField]
-    //protected UnityEvent OnBeAttacked;
+
     private void Start()
     {
+        Debug.Log("子节点数量：-----------------------"+spriteRenderers.Length);
         rb = this.GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        _defaultColor = spriteRenderer.color;
+        //spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+    }
+
+    private void ChangeSpriteColor(Color color)
+    {
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+        {
+            spriteRenderer.DOColor(color, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(Color.white);
+        }
     }
     private void FixedUpdate()
     {
@@ -63,10 +69,7 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        if (IsDie())
-        {
-            DestorySelf();
-        }
+
     }
     public bool IsDie()
     {
@@ -75,6 +78,10 @@ public class Character : MonoBehaviour
         return false;
     }
 
+    public virtual void Die()
+    {
+        DestorySelf();
+    }
     public virtual void DestorySelf()
     {
         Destroy(this.gameObject);
@@ -92,8 +99,11 @@ public class Character : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (spriteRenderer)
-            spriteRenderer.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(_defaultColor);
+        if (spriteRenderers.Length > 0)
+        {
+            ChangeSpriteColor(Color.red);
+            //spriteRenderer.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(_defaultColor);
+        }
         //OnBeAttacked.Invoke();
     }
 

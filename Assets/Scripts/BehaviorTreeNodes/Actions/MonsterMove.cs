@@ -60,7 +60,7 @@ public class MonsterMove : Action
         Vector2 playerPosition = PlayerManager._instance.PlayerPosition;
         Vector2 position = transform.position;
         Vector2 moveDir = (playerPosition - position).normalized;
-
+        FlipBasedOnDirection(moveDir.x);
         Vector2 targetPosition = position + moveDir;
 
         targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
@@ -72,7 +72,7 @@ public class MonsterMove : Action
     {
         Vector2 position = transform.position;
         Vector2 moveDir = direction;
-
+        FlipBasedOnDirection(moveDir.x);
         Vector2 targetPosition = position + moveDir;
 
         targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
@@ -85,6 +85,17 @@ public class MonsterMove : Action
         {
             direction = Utilities.RefectDirection(direction, normalVector);
             Debug.Log("Ëæ»ú·½Ïò---------£º" + direction);
+        }
+    }
+    private void FlipBasedOnDirection(float directionX)
+    {
+        if (directionX > 0)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (directionX < 0)
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
 }
