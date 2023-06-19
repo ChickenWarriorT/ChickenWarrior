@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     [SerializeField]
     private int maxHealth;
     //当前血量
+    [SerializeField]
     private int currentHealth;
     //伤害
     [SerializeField]
@@ -21,7 +22,6 @@ public class Character : MonoBehaviour
     //攻击距离
     [SerializeField]
     private int attackRange;
-    [SerializeField]
     protected Rigidbody2D rb;
     //初始攻击CD
     [SerializeField]
@@ -33,7 +33,8 @@ public class Character : MonoBehaviour
     [SerializeField]
     private float attackCD;
 
-
+    protected Animator animator;
+    protected Animation _animation;
     public int MaxHealth { get => maxHealth; }
     public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public int AttakeDamage { get => attakDamage; set => attakDamage = value; }
@@ -46,13 +47,14 @@ public class Character : MonoBehaviour
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public float DefaultAttackCD { get => defaultAttackCD; set => defaultAttackCD = value; }
 
-
-    private void Start()
+    protected virtual void Start()
     {
-        Debug.Log("子节点数量：-----------------------"+spriteRenderers.Length);
         rb = this.GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        _animation = GetComponent<Animation>();
         //spriteRenderer = GetComponent<SpriteRenderer>();
         //spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        //Debug.Log("子节点数量：-----------------------" + spriteRenderers.Length);
     }
 
     private void ChangeSpriteColor(Color color)
@@ -96,14 +98,15 @@ public class Character : MonoBehaviour
         return currentAtkCD;
     }
 
+
     public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (spriteRenderers.Length > 0)
-        {
-            ChangeSpriteColor(Color.red);
-            //spriteRenderer.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(_defaultColor);
-        }
+        //if (spriteRenderers.Length > 0)
+        //{
+        //    ChangeSpriteColor(Color.red);
+        //    //spriteRenderer.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(_defaultColor);
+        //}
         //OnBeAttacked.Invoke();
     }
 

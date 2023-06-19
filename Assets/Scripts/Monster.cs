@@ -39,6 +39,11 @@ public class Monster : Character
         //Move();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     public void Init(Vector2 pos)
     {
         CurrentHealth = MaxHealth;
@@ -84,6 +89,7 @@ public class Monster : Character
         MonsterManager._instance.monsters.Remove(this);
         gameObject.SetActive(false);
     }
+
 
     private void Attack(Collider2D other)
     {

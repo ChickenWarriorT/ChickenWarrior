@@ -15,7 +15,7 @@ public class IsDead : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if (character.CurrentHealth <= 0)
+        if (character.IsDie())
         {
             return TaskStatus.Success;
         }

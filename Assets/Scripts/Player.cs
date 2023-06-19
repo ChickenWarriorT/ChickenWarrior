@@ -31,6 +31,7 @@ public class Player : Character
 
     private void Start()
     {
+        base.Start();
         targetPosition = transform.position;
         Init();
     }
@@ -38,6 +39,7 @@ public class Player : Character
     {
         Move();
     }
+
 
     public void Init()
     {

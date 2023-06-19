@@ -24,7 +24,7 @@ public class PlayAnimation : Action
     {
         switch (animationType)
         {
-            case(AnimationType.Die):
+            case (AnimationType.Die):
                 PlayDie();
                 return TaskStatus.Success;
             default:
@@ -36,6 +36,9 @@ public class PlayAnimation : Action
     public void PlayDie()
     {
         animator.SetTrigger("Die");
+        
     }
+
+
 
 }

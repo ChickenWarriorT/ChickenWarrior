@@ -114,7 +114,7 @@ public class Bullet : MonoBehaviour
         //如果是追踪子弹
         if (isTracing)
         {
-            ChangeDirection(target);
+            ChangeDirection(target.GetChild(0));
 
         }
     }
@@ -148,12 +148,13 @@ public class Bullet : MonoBehaviour
     public void Init(Vector2 startPos, GameObject target, int damage)
     {
         this.damage = damage;
+        //拿到hitpoint
         this.target = target.transform;
         //currentTarget = target.transform;
 
         transform.position = startPos;
         leftBounce = bounceCount;
-        ChangeDirection(this.target);
+        ChangeDirection(this.target.GetChild(0));
         flyMaxTimer = flyTimeMax;
         flyTime = ConvertFlyDistanceToTime(flyDistance, rb.velocity.magnitude);
         Debug.Log("飞行时间:" + flyDistance + ";" + flyTime);
@@ -231,7 +232,7 @@ public class Bullet : MonoBehaviour
 
                         if (tempEnemy != null)
                         {
-                            target = tempEnemy.transform;
+                            target = tempEnemy.transform ;
                             print(tempEnemy.name);
                             ChangeDirection(target);
                             flyTime = ConvertFlyDistanceToTime(afterbounceDistance, moveSpeed);
@@ -268,7 +269,6 @@ public class Bullet : MonoBehaviour
                 character.TakeDamage(damage);
                 if (leftBounce > 0)
                 {
-                    //GetComponent<Collider2D>().enabled = false;
                     leftBounce--;
                     Monster monster = character as Monster;
                     if (monster != null)

@@ -38,7 +38,6 @@ public class MonsterMove : Action
 
     public void Move()
     {
-
         switch (movementType)
         {
             case MovementType.Chasing:
