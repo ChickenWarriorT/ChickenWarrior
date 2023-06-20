@@ -19,7 +19,7 @@ public class CheckInSafeDistance : Conditional
     }
     public override TaskStatus OnUpdate()
     {
-        var distance = Vector2.Distance(transform.position, PlayerManager._instance.player.transform.position);
+        var distance = Vector2.Distance(transform.position, PlayerManager._instance.Player.transform.position);
         if (distance < awayDistance)
         {
             wasPlayerTooCloseLastFrame = true;

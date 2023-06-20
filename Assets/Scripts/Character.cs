@@ -45,15 +45,14 @@ public class Character : MonoBehaviour
         get => SpeedToTimePerAttack(defaultAttackCD, attackSpeed);
     }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-    public float DefaultAttackCD { get => defaultAttackCD; set => defaultAttackCD = value; }
+    public float DefaultAttackCD { get => defaultAttackCD; }
 
     protected virtual void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         _animation = GetComponent<Animation>();
-        //spriteRenderer = GetComponent<SpriteRenderer>();
-        //spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         //Debug.Log("子节点数量：-----------------------" + spriteRenderers.Length);
     }
 
@@ -64,20 +63,24 @@ public class Character : MonoBehaviour
             spriteRenderer.DOColor(color, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(Color.white);
         }
     }
-    private void FixedUpdate()
-    {
 
-    }
-
-    private void Update()
-    {
-
-    }
+    //判定死亡
     public bool IsDie()
     {
         if (currentHealth <= 0)
             return true;
         return false;
+    }
+    //判定可攻击
+    public bool CanAttack(Transform target)
+    {
+        if (Vector2.Distance(target.position, transform.position) <= attackRange)
+            return true;
+        return false;
+    }
+    public virtual void Skill()
+    {
+        
     }
 
     public virtual void Die()
@@ -87,6 +90,11 @@ public class Character : MonoBehaviour
     public virtual void DestorySelf()
     {
         Destroy(this.gameObject);
+    }
+
+    public virtual void Init()
+    {
+
     }
 
     private float SpeedToTimePerAttack(float atkCD, float atkSpeed)
@@ -102,11 +110,11 @@ public class Character : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        //if (spriteRenderers.Length > 0)
-        //{
-        //    ChangeSpriteColor(Color.red);
-        //    //spriteRenderer.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(_defaultColor);
-        //}
+        if (spriteRenderers.Length > 0)
+        {
+            ChangeSpriteColor(Color.red);
+            //spriteRenderer.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo).ChangeStartValue(_defaultColor);
+        }
         //OnBeAttacked.Invoke();
     }
 

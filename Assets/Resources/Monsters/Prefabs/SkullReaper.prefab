@@ -209,8 +209,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2729758811735510904}
   - component: {fileID: 2647477565106280164}
-  - component: {fileID: -1488139606419275566}
   - component: {fileID: -5908288987678336655}
+  - component: {fileID: 4959397320221495644}
   - component: {fileID: 6627737742495450209}
   - component: {fileID: 5309217057377459105}
   - component: {fileID: -4124689024857029619}
@@ -261,29 +261,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-1488139606419275566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2733602856954721998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef63dd15c2aa33545a66a7a438550a94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  attakDamage: 1
-  moveSpeed: 1
-  attackRange: 0
-  rb: {fileID: 0}
-  defaultAttackCD: 0
-  attackSpeed: 0
-  attackCD: 0
-  safeDistance: 5
-  monsterType: 0
-  movementType: 1
 --- !u!114 &-5908288987678336655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +303,34 @@ MonoBehaviour:
       Version: 1.7.1
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
+--- !u!114 &4959397320221495644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2733602856954721998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fffb3a5361016645bbaf35ad2bb7a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10000
+  currentHealth: 0
+  attakDamage: 1
+  moveSpeed: 1
+  attackRange: 10
+  defaultAttackCD: 5
+  attackSpeed: 0
+  attackCD: 0
+  safeDistance: 0
+  monsterType: 0
+  movementType: 1
+  Player: {fileID: 0}
+  retreatDistance: 2
+  retreatSpeed: 10
+  chargeSpeed: 5
+  chargeDistance: 10
 --- !u!50 &6627737742495450209
 Rigidbody2D:
   serializedVersion: 4

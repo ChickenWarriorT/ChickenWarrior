@@ -44,4 +44,10 @@ public static class Utilities
         normalVector = Vector2.zero;
         return false;
     }
+
+    public static Vector2 DirectionFromAToB(Transform from,Transform to)
+    {
+        var direction = (to.position - from.position).normalized;
+        return direction;
+    }
 }

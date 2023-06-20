@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public Player player;
+    [SerializeField]
+    private Player player;
     public static PlayerManager _instance;
 
 
@@ -19,4 +20,6 @@ public class PlayerManager : MonoBehaviour
             return player.transform.position;
         }
     }
+
+    public Player Player { get => player;  }
 }

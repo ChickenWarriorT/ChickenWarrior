@@ -74,12 +74,13 @@ public class MonsterSpawner : MonoBehaviour
 
         Vector2 p = Random.insideUnitCircle * outRadius;
         Vector2 pos = p.normalized * (inRadius + p.magnitude);
-        Vector2 relatePos = pos + (Vector2)PlayerManager._instance.player.transform.position;
+        Vector2 relatePos = pos + (Vector2)PlayerManager._instance.Player.transform.position;
 
         //Monster e = Instantiate(type, relatePos, Quaternion.identity).GetComponent<Monster>();
         Monster monster = ObjectPoolManager._instance.GetMonster(type);
         MonsterManager._instance.monsters.Add(monster);
-        monster.Init(relatePos);
+        monster.transform.position = relatePos;
+        monster.Init();
         monster.gameObject.SetActive(true);
 
     }
@@ -95,7 +96,7 @@ public class MonsterSpawner : MonoBehaviour
 
         int maxAttempts = 100;
         int attemptCount = 0;
-        Vector2 playerPos = PlayerManager._instance.player.transform.position;
+        Vector2 playerPos = PlayerManager._instance.Player.transform.position;
 
         //≥¢ ‘’“µΩ∫œ  Œª÷√
         while (!isValidPosition && attemptCount < maxAttempts)
@@ -132,7 +133,8 @@ public class MonsterSpawner : MonoBehaviour
         //Monster e = Instantiate(enemy, randomPos, Quaternion.identity).GetComponent<Monster>();
         Monster monster = ObjectPoolManager._instance.GetMonster(type);
         MonsterManager._instance.monsters.Add(monster);
-        monster.Init(randomPos);
+        monster.transform.position = randomPos;
+        monster.Init();
         monster.gameObject.SetActive(true);
         
         count++;

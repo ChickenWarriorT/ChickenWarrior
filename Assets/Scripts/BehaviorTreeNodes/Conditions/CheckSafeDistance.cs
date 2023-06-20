@@ -45,7 +45,7 @@ public class CheckSafeDistance : Conditional
 
     public TaskStatus GreaterThanSafeDistance()
     {
-        var distance = Vector2.Distance(transform.position, PlayerManager._instance.player.transform.position);
+        var distance = Vector2.Distance(transform.position, PlayerManager._instance.Player.transform.position);
         if (distance >= safeDistance)
         {
             return TaskStatus.Success;
@@ -55,7 +55,7 @@ public class CheckSafeDistance : Conditional
     }
     public TaskStatus LessThanAwayDistance()
     {
-        var distance = Vector2.Distance(transform.position, PlayerManager._instance.player.transform.position);
+        var distance = Vector2.Distance(transform.position, PlayerManager._instance.Player.transform.position);
         if (distance <= awayDistance)
         {
             return TaskStatus.Success;
@@ -65,7 +65,7 @@ public class CheckSafeDistance : Conditional
     }
     public TaskStatus GreaterThanAwayLessThanSafe()
     {
-        var distance = Vector2.Distance(transform.position, PlayerManager._instance.player.transform.position);
+        var distance = Vector2.Distance(transform.position, PlayerManager._instance.Player.transform.position);
         if (distance >= awayDistance && distance <= safeDistance)
         {
             return TaskStatus.Success;

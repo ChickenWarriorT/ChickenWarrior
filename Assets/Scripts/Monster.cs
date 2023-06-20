@@ -29,26 +29,21 @@ public class Monster : Character
     public float SafeDistance { get => safeDistance; set => safeDistance = value; }
     public float AwayDistance { get => Mathf.Clamp(safeDistance-0.1f,0.0f,safeDistance); }
 
-    private void Awake()
-    {
-        //monsterAI = new MonsterAI(movementType, transform);
-    }
+    public Player Player;
 
-    private void FixedUpdate()
-    {
-        //Move();
-    }
 
     protected override void Start()
     {
         base.Start();
+        Player = PlayerManager._instance.Player;
     }
 
-    public void Init(Vector2 pos)
+    public override void Init()
     {
+        base.Init();
         CurrentHealth = MaxHealth;
-        transform.position = pos;
     }
+
 
     public void Move()
     {
@@ -88,6 +83,11 @@ public class Monster : Character
     {
         MonsterManager._instance.monsters.Remove(this);
         gameObject.SetActive(false);
+    }
+
+    public override void Skill()
+    {
+        base.Skill();
     }
 
 
