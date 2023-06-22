@@ -323,10 +323,9 @@ MonoBehaviour:
   defaultAttackCD: 5
   attackSpeed: 0
   attackCD: 0
-  safeDistance: 0
+  safeDistance: 10
   monsterType: 0
   movementType: 1
-  Player: {fileID: 0}
   retreatDistance: 2
   retreatSpeed: 10
   chargeSpeed: 5

@@ -29,13 +29,11 @@ public class Monster : Character
     public float SafeDistance { get => safeDistance; set => safeDistance = value; }
     public float AwayDistance { get => Mathf.Clamp(safeDistance-0.1f,0.0f,safeDistance); }
 
-    public Player Player;
 
 
     protected override void Start()
     {
         base.Start();
-        Player = PlayerManager._instance.Player;
     }
 
     public override void Init()

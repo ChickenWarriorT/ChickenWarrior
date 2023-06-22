@@ -4,25 +4,18 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class SpellSkill : Action
+public class IsSkillPerforming : Conditional
 {
+    private bool isSkillPerforming;
     private Character character;
 
     public override void OnAwake()
     {
         character = GetComponent<Character>();
-
     }
     public override TaskStatus OnUpdate()
     {
 
-        character.Skill();
-
-        if (!character.IsSkillPerforming) return TaskStatus.Success;
-
-        return TaskStatus.Failure;
+        return character.IsSkillPerforming ? TaskStatus.Success : TaskStatus.Failure;
     }
-
-
-
 }

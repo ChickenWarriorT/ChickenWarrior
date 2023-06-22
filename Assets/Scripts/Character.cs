@@ -33,8 +33,13 @@ public class Character : MonoBehaviour
     [SerializeField]
     private float attackCD;
 
+    protected bool skillInCD = false;
+
     protected Animator animator;
     protected Animation _animation;
+
+    protected bool isSkillPerforming = false;
+
     public int MaxHealth { get => maxHealth; }
     public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public int AttakeDamage { get => attakDamage; set => attakDamage = value; }
@@ -46,6 +51,7 @@ public class Character : MonoBehaviour
     }
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public float DefaultAttackCD { get => defaultAttackCD; }
+    public bool IsSkillPerforming { get => isSkillPerforming; }
 
     protected virtual void Start()
     {
@@ -71,18 +77,23 @@ public class Character : MonoBehaviour
             return true;
         return false;
     }
-    //判定可攻击
+    //判定可攻击目标
     public bool CanAttack(Transform target)
     {
-        if (Vector2.Distance(target.position, transform.position) <= attackRange)
+        //距离检测,和技能CD检测
+        if (Vector2.Distance(target.position, transform.position) <= attackRange && !skillInCD)
             return true;
         return false;
     }
     public virtual void Skill()
     {
-        
+
     }
 
+    public virtual bool IsFinishSkill()
+    {
+        return false;
+    }
     public virtual void Die()
     {
         DestorySelf();

@@ -19,18 +19,20 @@ public class MonsterMove : Action
     }
     public override void OnFixedUpdate()
     {
-        Move();
-        fixedUpdating = false;
+        //Move();
+        //fixedUpdating = false;
     }
     public override TaskStatus OnUpdate()
     {
-        if (!fixedUpdating)
-        {
-            fixedUpdating = true;
-            return TaskStatus.Success;
-        }
-        else
-            return TaskStatus.Running;
+        //if (!fixedUpdating)
+        //{
+        //    fixedUpdating = true;
+        //    return TaskStatus.Success;
+        //}
+        //else
+        //    return TaskStatus.Running;
+        Move();
+        return TaskStatus.Success;
     }
 
 
