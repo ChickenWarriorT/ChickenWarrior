@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 6627737742495450209}
   - component: {fileID: 5309217057377459105}
   - component: {fileID: -4124689024857029619}
+  - component: {fileID: -5965322728519975473}
   m_Layer: 0
   m_Name: SkullReaper
   m_TagString: Enemy
@@ -419,6 +420,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-5965322728519975473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2733602856954721998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801639f2738a4494d9b1df723889519b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skills:
+  - skillID: 1001
+    name: 
+    description: 
+    coolDown: 2
+    coolRemain: 0
+    cost: 0
+    atkDistance: 5
+    attackTargetTags:
+    - Player
+    attackTargets: []
+    impactType: []
+    atkRatio: 1
+    durationTime: 0
+    atkInterval: 0
+    owner: {fileID: 0}
+    prefabName: MeleeAttackSkill
+    animationName: Attack
+    hitFxName: 
+    hitFxPrfab: {fileID: 0}
+    attackType: 0
+    selectorType: 1
 --- !u!1 &2733602858420749822
 GameObject:
   m_ObjectHideFlags: 0

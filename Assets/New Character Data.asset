@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: New Character Data
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterName: 
+  maxHealth: 0
+  movementSpeed: 0
+  skills:
+  - skillID: 0
+    name: 
+    description: 
+    coolDown: 0
+    coolRemain: 0
+    cost: 0
+    atkDistance: 0
+    attackTargetTags: []
+    attackTargets: []
+    impactType: []
+    atkRatio: 0
+    durationTime: 0
+    atkInterval: 0
+    owner: {fileID: 0}
+    prefabName: 
+    animationName: 
+    hitFxName: 
+    hitFxPrfab: {fileID: 0}
