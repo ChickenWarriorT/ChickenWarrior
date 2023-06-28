@@ -448,7 +448,8 @@ MonoBehaviour:
     durationTime: 0
     atkInterval: 0
     owner: {fileID: 0}
-    prefabName: MeleeAttackSkill
+    prefabName: Fire_III_Flame_B
+    skillPrefab: {fileID: 0}
     animationName: Attack
     hitFxName: 
     hitFxPrfab: {fileID: 0}

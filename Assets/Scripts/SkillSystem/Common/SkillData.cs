@@ -15,7 +15,7 @@ namespace ChickenWarrior.Skill
         // 技能描述
         public string description;
         // 技能冷却
-        public float coolDown;
+        public float coolTime;
         // 冷却剩余
         public float coolRemain;
         // 技能消耗
@@ -40,6 +40,9 @@ namespace ChickenWarrior.Skill
         public GameObject owner;
         // 技能预制体名称
         public string prefabName;
+        // 技能预制体
+        //[HideInInspector]
+        public GameObject skillPrefab;
         // 动画名称
         public string animationName;
         // 受击特效名称

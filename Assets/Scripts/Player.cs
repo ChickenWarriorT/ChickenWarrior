@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using Timers;
+using ChickenWarrior.Skill;
 
 public class Player : Character
 {
@@ -29,7 +30,7 @@ public class Player : Character
         TimersManager.SetLoopableTimer(this, AttackCD, AutoAttack);
     }
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         targetPosition = transform.position;
@@ -40,9 +41,23 @@ public class Player : Character
         Move();
     }
 
-
-    public void Init()
+    private void Update()
     {
+        //按J释放技能
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            SkillManager skillManager = GetComponent<SkillManager>();
+            SkillData data = skillManager.PrepareSKill(1001);
+            if (data != null)
+            {
+                skillManager.GenerateSkill(data);
+            }
+        }
+    }
+
+    public override void Init()
+    {
+        base.Init();
         CurrentHealth = MaxHealth;
         OnHealthChanged.Invoke();
     }
