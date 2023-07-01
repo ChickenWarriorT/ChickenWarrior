@@ -5,12 +5,12 @@ using DG.Tweening;
 using Timers;
 using System;
 
-public enum MonsterType
-{
-    SkullReaper,
-    Monster02
-}
-public class Monster : Character
+//public enum MonsterType
+//{
+//    SkullReaper,
+//    Monster02
+//}
+public class Monster : Character,IPoolable
 {
     private bool _canCollide=true;
     private float _collideCD = 1.0f;
@@ -20,9 +20,9 @@ public class Monster : Character
     private float safeDistance;
 
 
-    //private MonsterAI monsterAI=null;
-    [SerializeField]
-    private MonsterType monsterType;
+    ////private MonsterAI monsterAI=null;
+    //[SerializeField]
+    //private string monsterName;
     [SerializeField]
     private MovementType movementType;
 

@@ -18,7 +18,7 @@ public class Player : Character
     [SerializeField]
     private BulletSpawner bulletSpawner;
     [SerializeField]
-    private BulletType bulletType;
+    private string bulletName;
     [SerializeField]
     private float weaponOffsetRange;
 
@@ -121,7 +121,7 @@ public class Player : Character
             {
                 //子弹出生点离角色的距离
                 Vector2 offset = (enemy.transform.position - transform.position).normalized * weaponOffsetRange;
-                bulletSpawner.SpawnBullet(bulletType, (Vector2)transform.position + offset, enemy, AttakeDamage);
+                bulletSpawner.SpawnBullet(bulletName, (Vector2)transform.position + offset, enemy, AttakeDamage);
             }
         }
     }

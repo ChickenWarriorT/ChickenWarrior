@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: -5965322728519975473}
   - component: {fileID: -5610585812170662630}
   m_Layer: 0
-  m_Name: SkullReaper
+  m_Name: SkullReaper 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -16,14 +16,29 @@ public class MonsterSpawner : MonoBehaviour
     int count = 0;
 
     private float time = 1.0f;
+    [SerializeField]
+    private Monster[] monsterPrefabs;
+    List<MonsterPool> monsterPools = new List<MonsterPool>();
 
     private void Awake()
     {
     }
     private void Start()
     {
+        foreach (var prefab in monsterPrefabs)
+        {
+            var poolHolder = new GameObject($"Pool:{prefab.name}");
 
-        //time = spawnCD;
+            poolHolder.transform.parent = transform;
+            poolHolder.transform.position = transform.position;
+            poolHolder.SetActive(false);
+
+            var pool = poolHolder.AddComponent<MonsterPool>();
+
+            pool.Prefab = prefab;
+            poolHolder.SetActive(true);
+            monsterPools.Add(pool);
+        }
     }
 
     private void Update()
@@ -39,7 +54,7 @@ public class MonsterSpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             print("生成怪物。。。。。。");
-            SpawnInRandomInPosition(MonsterType.SkullReaper, insideRadius, outsideRadius);
+            SpawnInRandomInPosition("SkullReaper", insideRadius, outsideRadius);
             time = spawnCD;
         }
         //按R生成追踪怪物
@@ -48,7 +63,7 @@ public class MonsterSpawner : MonoBehaviour
             print("生成怪物。。。。。。");
             for (int i = 0; i < 100; i++)
             {
-                SpawnInRecPosition(MonsterType.SkullReaper, insideRadius, outsideRadius);
+                SpawnInRecPosition("SkullReaper", insideRadius, outsideRadius);
             }
             print("怪物数量--------------：" + count);
             count = 0;
@@ -60,7 +75,7 @@ public class MonsterSpawner : MonoBehaviour
             print("生成怪物。。。。。。");
             for (int i = 0; i < 100; i++)
             {
-                SpawnInRecPosition(MonsterType.Monster02, insideRadius, outsideRadius);
+                SpawnInRecPosition("Monster02", insideRadius, outsideRadius);
             }
             print("怪物数量--------------：" + count);
             count = 0;
@@ -69,7 +84,7 @@ public class MonsterSpawner : MonoBehaviour
     }
 
     //随机生成怪物，在以自身为圆心，大于inRadius半径的圆，小于outRadius半径的圆的区域内
-    public void SpawnInRandomInPosition(MonsterType type,float inRadius, float outRadius)
+    public void SpawnInRandomInPosition(string monsterName,float inRadius, float outRadius)
     {
 
         Vector2 p = Random.insideUnitCircle * outRadius;
@@ -77,17 +92,17 @@ public class MonsterSpawner : MonoBehaviour
         Vector2 relatePos = pos + (Vector2)PlayerManager._instance.Player.transform.position;
 
         //Monster e = Instantiate(type, relatePos, Quaternion.identity).GetComponent<Monster>();
-        Monster monster = ObjectPoolManager._instance.GetMonster(type);
+        Monster monster = ObjectPoolManager._instance.Get<Monster>(monsterName);
         MonsterManager._instance.monsters.Add(monster);
         monster.transform.position = relatePos;
         monster.Init();
-        monster.gameObject.SetActive(true);
+        //monster.gameObject.SetActive(true);
 
     }
 
     //随机生成怪物，在以自身为圆心，大于inRadius半径的圆，小于outRadius半径的圆的区域内，且在一个固定范围内
     Vector2 randomPos;
-    public void SpawnInRecPosition(MonsterType type,float inRadius, float outRadius)
+    public void SpawnInRecPosition(string monsterName,float inRadius, float outRadius)
     {
 
         List<float> boundary = MapManager._instance.Boundary;
@@ -131,7 +146,7 @@ public class MonsterSpawner : MonoBehaviour
         }
 
         //Monster e = Instantiate(enemy, randomPos, Quaternion.identity).GetComponent<Monster>();
-        Monster monster = ObjectPoolManager._instance.GetMonster(type);
+        Monster monster = monsterPools[0].Get();
         MonsterManager._instance.monsters.Add(monster);
         monster.transform.position = randomPos;
         monster.Init();

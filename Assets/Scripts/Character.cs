@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour,IPoolable
 {
     protected SpriteRenderer[] spriteRenderers;
     //×î´óÑªÁ¿
@@ -129,6 +129,8 @@ public class Character : MonoBehaviour
         //OnBeAttacked.Invoke();
     }
 
-
-
+    public void Reset()
+    {
+        throw new System.NotImplementedException();
+    }
 }

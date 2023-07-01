@@ -17,8 +17,6 @@ namespace ChickenWarrior.Skill
         {
             for (int i = 0; i < skills.Length; i++)
                 InitSkill(skills[i]);
-
-
         }
 
         //初始化技能

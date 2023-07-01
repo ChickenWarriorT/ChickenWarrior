@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<T> where T : MonoBehaviour
+public class ObjectPoolTest<T> where T : MonoBehaviour
 {
     public T pooledObject;
     public int pooledAmount = 10;
