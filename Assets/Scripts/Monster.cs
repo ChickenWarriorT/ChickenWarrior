@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Timers;
-using System;
 
 //public enum MonsterType
 //{
@@ -29,7 +28,7 @@ public class Monster : Character,IPoolable
     public float SafeDistance { get => safeDistance; set => safeDistance = value; }
     public float AwayDistance { get => Mathf.Clamp(safeDistance-0.1f,0.0f,safeDistance); }
 
-
+    private System.Action<Monster> deactiveMonster;
 
     protected override void Start()
     {
@@ -75,13 +74,10 @@ public class Monster : Character,IPoolable
 
     public override void Die()
     {
-        base.Die();
-    }
-    public override void DestorySelf()
-    {
         MonsterManager._instance.monsters.Remove(this);
-        gameObject.SetActive(false);
+        deactiveMonster.Invoke(this);
     }
+
 
     public override void Skill()
     {
@@ -100,5 +96,15 @@ public class Monster : Character,IPoolable
             TimersManager.SetTimer(this, _collideCD, CanCollide);
             _canCollide = false;
         }
+    }
+    //重置怪物数据
+    public void Reset()
+    {
+
+    }
+
+    public void SetDeactiveMonster(System.Action<Monster> deactiveAction)
+    {
+        deactiveMonster = deactiveAction;
     }
 }

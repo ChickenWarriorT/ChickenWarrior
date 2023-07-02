@@ -12,7 +12,7 @@ public class MonsterPool : BasePool<Monster>
     protected override Monster OnCreatePoolItem()
     {
         var monster = base.OnCreatePoolItem();
-        Release(monster);
+        monster.SetDeactiveMonster(delegate { Release(monster); });
         return monster;
     }
 

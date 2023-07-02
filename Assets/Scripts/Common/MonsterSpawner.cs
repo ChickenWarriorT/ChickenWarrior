@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterSpawner : MonoBehaviour
+public class MonsterSpawner : BaseSpawner<Monster, MonsterPool>
 {
     [SerializeField]
     private float insideRadius;
@@ -16,30 +16,8 @@ public class MonsterSpawner : MonoBehaviour
     int count = 0;
 
     private float time = 1.0f;
-    [SerializeField]
-    private Monster[] monsterPrefabs;
-    List<MonsterPool> monsterPools = new List<MonsterPool>();
 
-    private void Awake()
-    {
-    }
-    private void Start()
-    {
-        foreach (var prefab in monsterPrefabs)
-        {
-            var poolHolder = new GameObject($"Pool:{prefab.name}");
 
-            poolHolder.transform.parent = transform;
-            poolHolder.transform.position = transform.position;
-            poolHolder.SetActive(false);
-
-            var pool = poolHolder.AddComponent<MonsterPool>();
-
-            pool.Prefab = prefab;
-            poolHolder.SetActive(true);
-            monsterPools.Add(pool);
-        }
-    }
 
     private void Update()
     {
@@ -84,7 +62,7 @@ public class MonsterSpawner : MonoBehaviour
     }
 
     //随机生成怪物，在以自身为圆心，大于inRadius半径的圆，小于outRadius半径的圆的区域内
-    public void SpawnInRandomInPosition(string monsterName,float inRadius, float outRadius)
+    public void SpawnInRandomInPosition(string monsterName, float inRadius, float outRadius)
     {
 
         Vector2 p = Random.insideUnitCircle * outRadius;
@@ -102,7 +80,7 @@ public class MonsterSpawner : MonoBehaviour
 
     //随机生成怪物，在以自身为圆心，大于inRadius半径的圆，小于outRadius半径的圆的区域内，且在一个固定范围内
     Vector2 randomPos;
-    public void SpawnInRecPosition(string monsterName,float inRadius, float outRadius)
+    public void SpawnInRecPosition(string monsterName, float inRadius, float outRadius)
     {
 
         List<float> boundary = MapManager._instance.Boundary;
@@ -132,7 +110,7 @@ public class MonsterSpawner : MonoBehaviour
         while (!isValidPosition)
         {
             //增加外圈范围
-            outRadius += outRadiusStep; 
+            outRadius += outRadiusStep;
 
             float randomX = Random.Range(boundary[0] + spawnOffSet, boundary[1] - spawnOffSet);
             float randomY = Random.Range(boundary[3] + spawnOffSet, boundary[2] - spawnOffSet);
@@ -146,12 +124,12 @@ public class MonsterSpawner : MonoBehaviour
         }
 
         //Monster e = Instantiate(enemy, randomPos, Quaternion.identity).GetComponent<Monster>();
-        Monster monster = monsterPools[0].Get();
+        Monster monster = objectPools[monsterName].Get();
         MonsterManager._instance.monsters.Add(monster);
         monster.transform.position = randomPos;
         monster.Init();
         monster.gameObject.SetActive(true);
-        
+
         count++;
     }
 

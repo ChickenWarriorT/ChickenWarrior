@@ -19,6 +19,7 @@ public class MonsterManager : MonoBehaviour
         if (monsters.Count > 0)
         {
             int r = Random.Range(0, monsters.Count);
+            return monsters[r];
         }
         return null;
     }

@@ -215,7 +215,6 @@ GameObject:
   - component: {fileID: 5309217057377459105}
   - component: {fileID: -4124689024857029619}
   - component: {fileID: -5965322728519975473}
-  - component: {fileID: -5610585812170662630}
   m_Layer: 0
   m_Name: SkullReaper
   m_TagString: Enemy
@@ -317,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fffb3a5361016645bbaf35ad2bb7a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10000
+  maxHealth: 1
   currentHealth: 0
   attakDamage: 1
   moveSpeed: 1
@@ -455,21 +454,6 @@ MonoBehaviour:
     hitFxPrfab: {fileID: 0}
     attackType: 0
     selectorType: 1
---- !u!114 &-5610585812170662630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2733602856954721998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e65ba3552ceba44f860c60f98356339, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 4959397320221495644}
-  defaultSize: 100
-  maxSize: 500
 --- !u!1 &2733602858420749822
 GameObject:
   m_ObjectHideFlags: 0

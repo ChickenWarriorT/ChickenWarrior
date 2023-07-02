@@ -473,7 +473,6 @@ GameObject:
   - component: {fileID: 448530670}
   - component: {fileID: 448530672}
   - component: {fileID: 448530673}
-  - component: {fileID: 448530674}
   - component: {fileID: 448530675}
   - component: {fileID: 448530676}
   - component: {fileID: 448530677}
@@ -536,23 +535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f2163b537af0e4fae820261595699a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &448530674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448530669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50bc170582d05ff4cb955d5199cc502a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  insideRadius: 10
-  outsideRadius: 15
-  spawnCD: 1
-  spawnOffSet: 5
-  monsterPrefabs: []
 --- !u!114 &448530675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc2ba3413f231f41baa581f7813747c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectPrefabs: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,7 +705,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 539741537}
-  - component: {fileID: 539741538}
   m_Layer: 0
   m_Name: MonsterPool
   m_TagString: Untagged
@@ -745,21 +727,6 @@ Transform:
   m_Father: {fileID: 2075204438}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &539741538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 539741536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e65ba3552ceba44f860c60f98356339, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  defaultSize: 100
-  maxSize: 500
 --- !u!1 &838631894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,7 +1067,7 @@ MonoBehaviour:
   moveSpeed: 10
   attackRange: 10
   defaultAttackCD: 10
-  attackSpeed: 20
+  attackSpeed: 100
   attackCD: 2
   OnHealthChanged:
     m_PersistentCalls:
@@ -1117,8 +1084,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  bulletSpawner: {fileID: 448530677}
-  bulletName: 
+  bulletSpawner: {fileID: 983859100}
+  bulletName: Bullet_01
   weaponOffsetRange: 1
 --- !u!58 &939732673
 CircleCollider2D:
@@ -1170,6 +1137,52 @@ MonoBehaviour:
     hitFxPrfab: {fileID: 0}
     attackType: 0
     selectorType: 0
+--- !u!1 &983859098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 983859099}
+  - component: {fileID: 983859100}
+  m_Layer: 0
+  m_Name: BulletSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &983859099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983859098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1021162041}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &983859100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983859098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc2ba3413f231f41baa581f7813747c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefabs:
+  - {fileID: 3040144590325585646, guid: a67438f0f6f5cfb468276b19d48492f7, type: 3}
 --- !u!1 &1021162040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,6 +1212,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1044087185}
+  - {fileID: 983859099}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1246,14 +1260,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50bc170582d05ff4cb955d5199cc502a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectPrefabs:
+  - {fileID: 4959397320221495644, guid: 910e0f2f629ad0441b1bd5e881a6fadc, type: 3}
   insideRadius: 10
   outsideRadius: 15
   spawnCD: 1
   spawnOffSet: 5
-  monsterPrefabs:
-  - {fileID: 4959397320221495644, guid: 910e0f2f629ad0441b1bd5e881a6fadc, type: 3}
-  - {fileID: 4959397320221495644, guid: 910e0f2f629ad0441b1bd5e881a6fadc, type: 3}
-  - {fileID: 4959397320221495644, guid: 910e0f2f629ad0441b1bd5e881a6fadc, type: 3}
 --- !u!1 &1195613316
 GameObject:
   m_ObjectHideFlags: 0

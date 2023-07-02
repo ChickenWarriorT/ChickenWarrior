@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public enum BulletType
-{
-    Bullet01,
-    Bullet02
-}
+//public enum BulletType
+//{
+//    Bullet01,
+//    Bullet02
+//}
 public class Bullet : MonoBehaviour
 {
-    [SerializeField]
-    private BulletType bulletType;
+    //[SerializeField]
+    //private BulletType bulletType;
     private Transform currentTarget;
 
     /// <summary>
@@ -61,6 +61,8 @@ public class Bullet : MonoBehaviour
     // 记录子弹的角度和半径
     private float angle = 0f;
     private float radius = 0f;
+
+    private System.Action<Bullet> deactiveBullet;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -196,11 +198,11 @@ public class Bullet : MonoBehaviour
         flyMaxTimer -= Time.fixedDeltaTime;
         if (flyTime <= 0.0f)
         {
-            gameObject.SetActive(false);
+            deactiveBullet.Invoke(this);
         }
         if (flyMaxTimer <= 0.0f)
         {
-            gameObject.SetActive(false);
+            deactiveBullet.Invoke(this);
         }
     }
 
@@ -250,7 +252,7 @@ public class Bullet : MonoBehaviour
                     else
                     {
                         print("弹跳次数不足，销毁子弹。");
-                        gameObject.SetActive(false);
+                        deactiveBullet.Invoke(this);
                     }
                 }
             }
@@ -299,11 +301,14 @@ public class Bullet : MonoBehaviour
                     else
                     {
                         print("弹跳次数不足，销毁子弹。");
-                        gameObject.SetActive(false);
+                        deactiveBullet.Invoke(this);
                     }
                 }
             }
         }
-
+    }
+    public void SetDeactiveBullet(System.Action<Bullet> deactiveAction)
+    {
+        deactiveBullet = deactiveAction;
     }
 }
