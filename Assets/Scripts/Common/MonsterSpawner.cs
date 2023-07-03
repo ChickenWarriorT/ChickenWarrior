@@ -21,13 +21,6 @@ public class MonsterSpawner : BaseSpawner<Monster, MonsterPool>
 
     private void Update()
     {
-        //time -= Time.deltaTime;
-        //if (time <= 0.0f)
-        //{
-        //    SpawnInRandomInPosition(insideRadius, outsideRadius);
-        //    time = spawnCD;
-        //}
-
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -69,12 +62,11 @@ public class MonsterSpawner : BaseSpawner<Monster, MonsterPool>
         Vector2 pos = p.normalized * (inRadius + p.magnitude);
         Vector2 relatePos = pos + (Vector2)PlayerManager._instance.Player.transform.position;
 
-        //Monster e = Instantiate(type, relatePos, Quaternion.identity).GetComponent<Monster>();
-        Monster monster = ObjectPoolManager._instance.Get<Monster>(monsterName);
+        //从对象池中获取怪物
+        Monster monster = objectPools[monsterName].Get();
         MonsterManager._instance.monsters.Add(monster);
         monster.transform.position = relatePos;
         monster.Init();
-        //monster.gameObject.SetActive(true);
 
     }
 
@@ -123,7 +115,6 @@ public class MonsterSpawner : BaseSpawner<Monster, MonsterPool>
             }
         }
 
-        //Monster e = Instantiate(enemy, randomPos, Quaternion.identity).GetComponent<Monster>();
         Monster monster = objectPools[monsterName].Get();
         MonsterManager._instance.monsters.Add(monster);
         monster.transform.position = randomPos;

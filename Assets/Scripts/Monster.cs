@@ -4,11 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 using Timers;
 
-//public enum MonsterType
-//{
-//    SkullReaper,
-//    Monster02
-//}
 public class Monster : Character,IPoolable
 {
     private bool _canCollide=true;
@@ -18,10 +13,6 @@ public class Monster : Character,IPoolable
     [SerializeField]
     private float safeDistance;
 
-
-    ////private MonsterAI monsterAI=null;
-    //[SerializeField]
-    //private string monsterName;
     [SerializeField]
     private MovementType movementType;
 

@@ -68,27 +68,11 @@ public class Player : Character
     }
     public void Move()
     {
-        //Vector2 position = transform.position;
-        //Vector2 moveDir = _inputDerection.normalized;
-        //Vector2 targetPosition = position + moveDir;
-
-        //if (position != targetPosition)
-        //{
-        //    rb.DOMove(targetPosition, MoveSpeed).SetSpeedBased();
-        //}
 
         Vector2 position = transform.position;
         Vector2 moveDir = _inputDerection.normalized;
         Vector2 targetPosition = position + moveDir;
 
-        //List<float> boundary = MapManager._instance.Boundary;
-        //if (boundary != null)
-        //{
-        //    float clampedX = Mathf.Clamp(targetPosition.x, boundary[0], boundary[1]);
-        //    float clampedY = Mathf.Clamp(targetPosition.y, boundary[3], boundary[2]);
-
-        //    targetPosition = new Vector2(clampedX, clampedY);
-        //}
         targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
 
         if (position != targetPosition)

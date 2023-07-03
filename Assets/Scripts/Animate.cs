@@ -14,7 +14,6 @@ public class Animate : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
     }
-    // Update is called once per frame
     void Update()
     {
         animator.SetBool("IsMove", isMove);

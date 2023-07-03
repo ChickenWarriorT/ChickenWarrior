@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-//public enum BulletType
-//{
-//    Bullet01,
-//    Bullet02
-//}
+
 public class Bullet : MonoBehaviour
 {
-    //[SerializeField]
-    //private BulletType bulletType;
+    // 当前目标
     private Transform currentTarget;
 
-    /// <summary>
-    /// 子弹的的前进方向
-    /// </summary>
+
+    // 子弹方向
     private Vector2 dir;
 
     private bool isMove = false;
@@ -66,7 +60,6 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        //Destroy(this.gameObject, 10);
         flyTime = ConvertFlyDistanceToTime(flyDistance, moveSpeed);
     }
 
@@ -76,7 +69,6 @@ public class Bullet : MonoBehaviour
     }
     private void OnEnable()
     {
-        //StartMoving();
     }
 
 
