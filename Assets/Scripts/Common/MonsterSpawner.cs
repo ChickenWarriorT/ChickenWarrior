@@ -64,7 +64,7 @@ public class MonsterSpawner : BaseSpawner<Monster, MonsterPool>
 
         //从对象池中获取怪物
         Monster monster = objectPools[monsterName].Get();
-        MonsterManager._instance.monsters.Add(monster);
+        MonsterManager._instance.AddMonster(monster);
         monster.transform.position = relatePos;
         monster.Init();
 
@@ -116,7 +116,7 @@ public class MonsterSpawner : BaseSpawner<Monster, MonsterPool>
         }
 
         Monster monster = objectPools[monsterName].Get();
-        MonsterManager._instance.monsters.Add(monster);
+        MonsterManager._instance.AddMonster(monster);
         monster.transform.position = randomPos;
         monster.Init();
         monster.gameObject.SetActive(true);

@@ -159,10 +159,10 @@ public class Bullet : MonoBehaviour
     //除当前目标外，寻找全体随机怪物
     private Monster FindRandomEnemyNotIncludeTarget(Monster target)
     {
-        Debug.Log("怪物数量外部------：" + MonsterManager._instance.monsters.Count);
+        Debug.Log("怪物数量外部------：" + MonsterManager._instance.GetMonstersCount());
         //TODO 确认怪物生成后是否加入了List 怪物死亡是否移除
-        List<Monster> enemyList = new List<Monster>(MonsterManager._instance.monsters);
-        Debug.Log("怪物数量外部：" + MonsterManager._instance.monsters.Count);
+        List<Monster> enemyList = new List<Monster>(MonsterManager._instance.Monsters);
+        Debug.Log("怪物数量外部：" + MonsterManager._instance.GetMonstersCount());
 
         enemyList.Remove(target);
 

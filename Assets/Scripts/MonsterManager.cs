@@ -7,10 +7,27 @@ public class MonsterManager : MonoBehaviour
     public static MonsterManager _instance;
 
     [SerializeField]
-    public List<Monster> monsters;
+    private List<Monster> monsters;
+
+    public List<Monster> Monsters { get => monsters; set => monsters = value; }
+
     private void Awake()
     {
         _instance = this;
+    }
+
+    public void AddMonster(Monster monster)
+    {
+        monsters.Add(monster);
+    }
+    public void RemoveMonster(Monster monster)
+    {
+        monsters.Remove(monster);
+    }
+
+    public int GetMonstersCount()
+    {
+        return monsters.Count;
     }
 
     //·µ»ØËæ»ú¹ÖÎï
@@ -22,5 +39,18 @@ public class MonsterManager : MonoBehaviour
             return monsters[r];
         }
         return null;
+    }
+
+    public List<Monster> GetActiveMonster()
+    {
+        List<Monster> activeMonsters = new List<Monster>();
+        foreach (var monster in monsters)
+        {
+            if (monster.gameObject.activeSelf)
+            {
+                activeMonsters.Add(monster);
+            }
+        }
+        return activeMonsters;
     }
 }

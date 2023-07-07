@@ -65,7 +65,7 @@ public class Monster : Character,IPoolable
 
     public override void Die()
     {
-        MonsterManager._instance.monsters.Remove(this);
+        MonsterManager._instance.RemoveMonster(this);
         deactiveMonster.Invoke(this);
     }
 
