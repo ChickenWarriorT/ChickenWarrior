@@ -53,8 +53,12 @@ public class Player : Character
                 skillManager.GenerateSkill(data);
             }
         }
-    }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            AutoAttack();
+        }
 
+    }
     public override void Init()
     {
         base.Init();

@@ -44,6 +44,7 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private bool isTracing;
 
+    [SerializeField]
     private Transform target;
     [SerializeField]
     private float detectDistance = 0.01f;
@@ -73,31 +74,6 @@ public class Bullet : MonoBehaviour
 
 
 
-    //public void StartMoving()
-    //    {
-    //        StartCoroutine(MoveInCircle());
-    //    }
-
-    //    IEnumerator MoveInCircle()
-    //    {
-    //        // 每一帧更新子弹的位置
-    //        while (true)
-    //        {
-    //            // 计算新的半径和角度
-    //            radius += radiusIncreaseRate * Time.deltaTime;
-    //            angle += speed * Time.deltaTime;
-
-    //            // 计算新的位置
-    //            Vector3 newPos = new Vector3(radius * Mathf.Cos(angle), radius * Mathf.Sin(angle), 0);
-
-    //            // 更新子弹的位置
-    //            transform.position = newPos;
-
-    //            yield return null;
-    //        }
-    //    }
-    
-
     //子弹移动
     private void Move()
     {
@@ -108,7 +84,8 @@ public class Bullet : MonoBehaviour
         //如果是追踪子弹
         if (isTracing)
         {
-            ChangeDirection(target.GetChild(0));
+            if (IsNotNullOrInActive(target))
+                ChangeDirection(target?.GetChild(0));
 
         }
     }
@@ -141,6 +118,9 @@ public class Bullet : MonoBehaviour
     //初始化
     public void Init(Vector2 startPos, GameObject target, int damage)
     {
+        //如果还在移动，不进行初始化
+        if (isMove) return;
+
         this.damage = damage;
         //拿到hitpoint
         this.target = target.transform;
@@ -190,11 +170,11 @@ public class Bullet : MonoBehaviour
         flyMaxTimer -= Time.fixedDeltaTime;
         if (flyTime <= 0.0f)
         {
-            deactiveBullet.Invoke(this);
+            BulletDie();
         }
         if (flyMaxTimer <= 0.0f)
         {
-            deactiveBullet.Invoke(this);
+            BulletDie();
         }
     }
 
@@ -204,53 +184,6 @@ public class Bullet : MonoBehaviour
         return distance / speed;
     }
 
-    //射线检测
-    private void RayTracingDetect()
-    {
-        Ray2D ray = new Ray2D(transform.position, dir);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, detectDistance);
-        if (hit.collider != null && hit.collider.CompareTag("Enemy"))
-        {
-            Character character = hit.collider.GetComponent<Character>();
-            if (character != null)
-            {
-                character.TakeDamage(damage);
-                if (leftBounce > 0)
-                {
-                    leftBounce--;
-                    Monster monster = character as Monster;
-                    if (monster != null)
-                    {
-                        //拿到随机一个enemy
-                        var tempEnemy = FindRandomEnemyNotIncludeTarget(monster);
-
-                        if (tempEnemy != null)
-                        {
-                            target = tempEnemy.transform ;
-                            print(tempEnemy.name);
-                            ChangeDirection(target);
-                            flyTime = ConvertFlyDistanceToTime(afterbounceDistance, moveSpeed);
-                        }
-                        else
-                        {
-                            print("弹射次数大于0时，未找到怪物，向随机方向发射");
-                            dir = GetRandomDirection();
-                            transform.rotation = Quaternion.LookRotation(Vector3.forward, dir);
-                            Debug.Log("随机飞行方向:" + dir);
-                            target = null;
-                            flyTime = ConvertFlyDistanceToTime(afterbounceDistance, moveSpeed);
-                        }
-                    }
-                    else
-                    {
-                        print("弹跳次数不足，销毁子弹。");
-                        deactiveBullet.Invoke(this);
-                    }
-                }
-            }
-        }
-        Debug.DrawRay(ray.origin, ray.direction , Color.green);
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -293,11 +226,17 @@ public class Bullet : MonoBehaviour
                     else
                     {
                         print("弹跳次数不足，销毁子弹。");
-                        deactiveBullet.Invoke(this);
+                        BulletDie();
                     }
                 }
             }
         }
+    }
+
+    private void BulletDie()
+    {
+        isMove = false;
+        deactiveBullet.Invoke(this);
     }
     public void SetDeactiveBullet(System.Action<Bullet> deactiveAction)
     {
