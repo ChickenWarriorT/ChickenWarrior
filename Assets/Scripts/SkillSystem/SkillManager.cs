@@ -30,10 +30,10 @@ namespace ChickenWarrior.Skill
         public void GenerateSkill(SkillData data)
         {
             //创建技能预制体
-            GameObject skill = Instantiate(data.skillPrefab, transform.position, transform.rotation);
 
-            //销毁技能
-            Destroy(skill, data.durationTime);
+            Effect effect = EffectSpawner._instance.SpawnEffect(data.prefabName,transform.position,data.durationTime);
+
+            //SkillDeployer deployer = skills
 
             //开始技能冷却
             StartCoroutine(CoolTimeDown(data));

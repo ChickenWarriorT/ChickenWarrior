@@ -49,10 +49,6 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float detectDistance = 0.01f;
 
-    // 设定子弹的速度和半径增长速度
-    public float speed = 5f;
-    public float radiusIncreaseRate = 1f;
-
     // 记录子弹的角度和半径
     private float angle = 0f;
     private float radius = 0f;
@@ -130,7 +126,7 @@ public class Bullet : MonoBehaviour
         leftBounce = bounceCount;
         ChangeDirection(this.target.GetChild(0));
         flyMaxTimer = flyTimeMax;
-        flyTime = ConvertFlyDistanceToTime(flyDistance, rb.velocity.magnitude);
+        flyTime = ConvertFlyDistanceToTime(flyDistance, moveSpeed);
         Debug.Log("飞行时间:" + flyDistance + ";" + flyTime);
         isMove = true;
     }

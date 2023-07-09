@@ -17,8 +17,6 @@ public class MonsterSpawner : BaseSpawner<Monster, MonsterPool>
 
     private float time = 1.0f;
 
-
-
     private void Update()
     {
 
