@@ -8,6 +8,11 @@ namespace ChickenWarrior.Skill
     {
         private SkillData skilldata;
 
+        public SkillDeployer(SkillData data)
+        {
+            skilldata = data;
+        }
+
         public SkillData Skilldata { get => skilldata; set => skilldata = value; }
     }
 }

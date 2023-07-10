@@ -32,7 +32,7 @@ namespace ChickenWarrior.Skill
             //创建技能预制体
 
             Effect effect = EffectSpawner._instance.SpawnEffect(data.prefabName,transform.position,data.durationTime);
-
+            SkillDeployer deployer = new SkillDeployer(data);
             //SkillDeployer deployer = skills
 
             //开始技能冷却

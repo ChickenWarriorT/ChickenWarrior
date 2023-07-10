@@ -12,7 +12,7 @@ public class Effect : MonoBehaviour
     {
         DestoryOnTime();
     }
-    public void Init(Vector2 pos,float time)
+    public void Init(Vector2 pos, float time)
     {
         transform.position = pos;
         durationTime = time;
@@ -24,7 +24,7 @@ public class Effect : MonoBehaviour
     private void DestoryOnTime()
     {
         timer -= Time.fixedDeltaTime;
-        
+
         if (timer <= 0.0f)
         {
             EffectDie();
