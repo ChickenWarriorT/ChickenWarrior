@@ -47,11 +47,11 @@ public class Player : Character
         if (Input.GetKeyDown(KeyCode.J))
         {
             SkillManager skillManager = GetComponent<SkillManager>();
-            SkillData data = skillManager.PrepareSKill(1001);
-            if (data != null)
-            {
-                skillManager.GenerateSkill(data);
-            }
+            //SkillData data = skillManager.PrepareSKill(1001);
+            //if (data != null)
+            //{
+            //    skillManager.GenerateSkill(data);
+            //}
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -146,20 +146,20 @@ public class Player : Character
         if (GUI.Button(new Rect(10, 10, 150, 30), "Fire_III_Flame_B"))
         {
             SkillManager skillManager = GetComponent<SkillManager>();
-            SkillData data = skillManager.PrepareSKill(1001);
-            if (data != null)
-            {
-                skillManager.GenerateSkill(data);
-            }
+            //SkillData data = skillManager.PrepareSKill(1001);
+            //if (data != null)
+            //{
+            //    skillManager.GenerateSkill(data);
+            //}
         }
         if (GUI.Button(new Rect(10, 50, 150, 30), "Fire_III_Flame_C"))
         {
             SkillManager skillManager = GetComponent<SkillManager>();
-            SkillData data = skillManager.PrepareSKill(1002);
-            if (data != null)
-            {
-                skillManager.GenerateSkill(data);
-            }
+            //SkillData data = skillManager.PrepareSKill(1002);
+            //if (data != null)
+            //{
+            //    skillManager.GenerateSkill(data);
+            //}
         }
     }
 }

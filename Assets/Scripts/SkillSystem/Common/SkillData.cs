@@ -54,7 +54,10 @@ namespace ChickenWarrior.Skill
         public SkillAttackType attackType;
         // 选择类型 扇形（圆形），矩形
         public SelectorType selectorType;
-
+        //技能效果id列表
+        public List<int> effectIds;
+        //技能效果作用目标
+        public GameObject target;
         // 其他技能参数...
     }
 }
