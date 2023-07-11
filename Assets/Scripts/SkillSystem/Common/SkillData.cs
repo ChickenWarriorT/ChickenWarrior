@@ -58,6 +58,8 @@ namespace ChickenWarrior.Skill
         public List<int> effectIds;
         //技能效果作用目标
         public GameObject target;
+        //释放次数
+        public int castTimes;
         // 其他技能参数...
     }
 }

@@ -23,11 +23,14 @@ namespace ChickenWarrior.Skill
 
         }
 
-        public void Activate()
+        public void Cast()
         {
             if (!IsOnCooldown())
             {
-                ApplyEffects();
+                for (int i = 0; i < skillData.castTimes; i++)
+                {
+                    ApplyEffects();
+                }
                 StartCooldown();
             }
         }
@@ -38,7 +41,7 @@ namespace ChickenWarrior.Skill
 
         public void ApplyEffects()
         {
-            // 根据data中的技能效果ID，从字典中获取对应的技能效果，并将其应用到游戏中
+            // 遍历所有技能效果，并使用
             foreach (var effect in skillEffects)
             {
                 if (effect != null)

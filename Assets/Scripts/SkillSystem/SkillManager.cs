@@ -64,6 +64,7 @@ namespace ChickenWarrior.Skill
         //}
 
         // 存储所有的技能
+        [SerializeField]
         private Dictionary<int, Skill> skills = new Dictionary<int, Skill>();
 
         // 加载和初始化所有的技能
@@ -73,7 +74,7 @@ namespace ChickenWarrior.Skill
 
             foreach (SkillData skillData in allSkillData)
             {
-                Skill skill = new Skill(skillData);          
+                Skill skill = new Skill(skillData);
 
                 skills[skillData.skillID] = skill;
             }
