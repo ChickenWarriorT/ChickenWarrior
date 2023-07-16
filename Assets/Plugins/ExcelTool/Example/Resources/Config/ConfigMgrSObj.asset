@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f156eaadd08264085078a986cc839a, type: 3}
+  m_Name: ConfigMgrSObj
+  m_EditorClassIdentifier: 
+  skill_BasicSkills:
+  - ID: 1001
+    SkillName: "\u706B\u7130\u98CE\u66B4"
+    SearchType: 
+    SearchRange: 400
+    SkillReleaseRange: 100
+    SkillRange: 0
+    TargetType: 1
+    SearcchLogic: 0
+    TargetNum: 99
+    CastType: 0
+    SkillCD: 2500
+    SkillDefaultCD: 0
+  - ID: 1002
+    SkillName: "\u7206\u70B8"
+    SearchType: 
+    SearchRange: 1000
+    SkillReleaseRange: 200
+    SkillRange: 0
+    TargetType: 1
+    SearcchLogic: 0
+    TargetNum: 99
+    CastType: 0
+    SkillCD: 0
+    SkillDefaultCD: 0
+  - ID: 1003
+    SkillName: "\u653B\u51FB\u63D0\u5347"
+    SearchType: 
+    SearchRange: 1000
+    SkillReleaseRange: 99999
+    SkillRange: 0
+    TargetType: 2
+    SearcchLogic: 0
+    TargetNum: 99
+    CastType: 0
+    SkillCD: 0
+    SkillDefaultCD: 0
+  skill_SkillEffects:
+  - ID: 1001
+    SkillName: "\u706B\u7130\u98CE\u66B4"
+    SearchType: 0
+    SearchRange: 400
+    SkillReleaseRange: 100
+    SkillRange: 0
+    TargetType: 1
+    SearcchLogic: 0
+    TargetNum: 99
+    CastType: 0
+    SkillCD: 2500
+    SkillDefaultCD: 0
+  - ID: 1002
+    SkillName: "\u7206\u70B8"
+    SearchType: 0
+    SearchRange: 1000
+    SkillReleaseRange: 200
+    SkillRange: 0
+    TargetType: 1
+    SearcchLogic: 0
+    TargetNum: 99
+    CastType: 0
+    SkillCD: 0
+    SkillDefaultCD: 0
+  - ID: 1003
+    SkillName: "\u653B\u51FB\u63D0\u5347"
+    SearchType: 0
+    SearchRange: 1000
+    SkillReleaseRange: 99999
+    SkillRange: 0
+    TargetType: 2
+    SearcchLogic: 0
+    TargetNum: 99
+    CastType: 0
+    SkillCD: 0
+    SkillDefaultCD: 0
