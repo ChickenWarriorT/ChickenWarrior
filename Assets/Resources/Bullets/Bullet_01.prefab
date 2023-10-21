@@ -100,17 +100,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905c215ad53021c4bad8520451291301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletType: 0
   moveSpeed: 20
   damage: 5
   bounceCount: 1
   startPosition: {x: 0, y: 0}
   afterbounceDistance: 99
-  flyDistance: 4
+  flyDistance: 10
   isTracing: 1
+  target: {fileID: 0}
   detectDistance: 0.01
-  speed: 5
-  radiusIncreaseRate: 1
 --- !u!50 &7508369373002304374
 Rigidbody2D:
   serializedVersion: 4

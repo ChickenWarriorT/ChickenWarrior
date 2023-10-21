@@ -1168,7 +1168,7 @@ MonoBehaviour:
   currentHealth: 0
   attakDamage: 2
   moveSpeed: 10
-  attackRange: 10
+  attackRange: 500
   defaultAttackCD: 10
   attackSpeed: 100
   attackCD: 2
@@ -1218,49 +1218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801639f2738a4494d9b1df723889519b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills:
-  - skillID: 1001
-    name: 
-    description: 
-    coolTime: 2
-    coolRemain: 0
-    cost: 0
-    atkDistance: 0
-    attackTargetTags: []
-    attackTargets: []
-    impactType: []
-    atkRatio: 0
-    durationTime: 1
-    atkInterval: 0
-    owner: {fileID: 0}
-    prefabName: Fire_III_Flame_B
-    skillPrefab: {fileID: 0}
-    animationName: 
-    hitFxName: 
-    hitFxPrfab: {fileID: 0}
-    attackType: 0
-    selectorType: 0
-  - skillID: 1002
-    name: 
-    description: 
-    coolTime: 2
-    coolRemain: 0
-    cost: 0
-    atkDistance: 0
-    attackTargetTags: []
-    attackTargets: []
-    impactType: []
-    atkRatio: 0
-    durationTime: 1
-    atkInterval: 0
-    owner: {fileID: 0}
-    prefabName: Fire_III_Flame_C
-    skillPrefab: {fileID: 0}
-    animationName: 
-    hitFxName: 
-    hitFxPrfab: {fileID: 0}
-    attackType: 0
-    selectorType: 0
 --- !u!1 &983859098
 GameObject:
   m_ObjectHideFlags: 0

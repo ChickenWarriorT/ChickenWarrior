@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tasks;
+
 
 public class Character : MonoBehaviour
 {
     protected SpriteRenderer[] spriteRenderers;
+    protected BehaviorTree behaviorTree;
     //最大血量
     [SerializeField]
     private int maxHealth;
@@ -59,9 +63,14 @@ public class Character : MonoBehaviour
         animator = GetComponent<Animator>();
         _animation = GetComponent<Animation>();
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        behaviorTree = GetComponent<BehaviorTree>();
         //Debug.Log("子节点数量：-----------------------" + spriteRenderers.Length);
     }
 
+    private void Update()
+    {
+        behaviorTree.
+    }
     private void ChangeSpriteColor(Color color)
     {
         foreach (SpriteRenderer spriteRenderer in spriteRenderers)

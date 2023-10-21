@@ -35,8 +35,8 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float flyDistance;
 
-    private float flyTime;
     private float flyTimeMax = 20.0f;
+    private float flyTime;
     private float flyMaxTimer;
 
     private float currentFlyDistance;
