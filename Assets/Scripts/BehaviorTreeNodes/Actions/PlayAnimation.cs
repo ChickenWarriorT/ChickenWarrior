@@ -4,41 +4,16 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public enum AnimationType
+namespace Core.AI
 {
-    Die,
-    Walk,
-    Skill_01,
-    Skill_02
-}
-public class PlayAnimation : Action
-{
-    private Animator animator;
-    public AnimationType animationType;
+    public class PlayAnimation : EnemyAction
+    {
 
-    public override void OnAwake()
-    {
-        animator = GetComponent<Animator>();
-    }
-    public override TaskStatus OnUpdate()
-    {
-        switch (animationType)
+
+        public string animationTriggerName;
+        public override void OnStart()
         {
-            case (AnimationType.Die):
-                PlayDie();
-                return TaskStatus.Success;
-            default:
-                return TaskStatus.Failure;
-
+            animator.SetTrigger(animationTriggerName);
         }
     }
-
-    public void PlayDie()
-    {
-        animator.SetTrigger("Die");
-        
-    }
-
-
-
 }

@@ -69,7 +69,7 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        behaviorTree.
+        //behaviorTree.
     }
     private void ChangeSpriteColor(Color color)
     {

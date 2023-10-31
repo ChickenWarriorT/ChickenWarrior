@@ -277,7 +277,7 @@ MonoBehaviour:
   startWhenEnabled: 1
   asynchronousLoad: 0
   pauseWhenDisabled: 0
-  restartWhenComplete: 0
+  restartWhenComplete: 1
   logTaskChanges: 0
   group: 0
   resetValuesOnRestart: 0
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  currentHealth: 0
+  currentHealth: 10
   attakDamage: 1
   moveSpeed: 1
   attackRange: 10
@@ -431,29 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801639f2738a4494d9b1df723889519b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skills:
-  - skillID: 1001
-    name: 
-    description: 
-    coolTime: 0
-    coolRemain: 0
-    cost: 0
-    atkDistance: 5
-    attackTargetTags:
-    - Player
-    attackTargets: []
-    impactType: []
-    atkRatio: 1
-    durationTime: 0
-    atkInterval: 0
-    owner: {fileID: 0}
-    prefabName: Fire_III_Flame_B
-    skillPrefab: {fileID: 0}
-    animationName: Attack
-    hitFxName: 
-    hitFxPrfab: {fileID: 0}
-    attackType: 0
-    selectorType: 1
 --- !u!1 &2733602858420749822
 GameObject:
   m_ObjectHideFlags: 0

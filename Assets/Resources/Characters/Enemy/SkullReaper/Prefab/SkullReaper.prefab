@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4000012357429372}
   - component: {fileID: 95000011693912544}
   m_Layer: 0
-  m_Name: Skull_02
+  m_Name: SkullReaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
