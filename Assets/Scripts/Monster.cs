@@ -9,12 +9,9 @@ public class Monster : Character,IPoolable
     private bool _canCollide=true;
     private float _collideCD = 1.0f;
 
-    //安全距离
+    //安全距离 
     [SerializeField]
     private float safeDistance;
-
-    [SerializeField]
-    private MovementType movementType;
 
     public float SafeDistance { get => safeDistance; set => safeDistance = value; }
     public float AwayDistance { get => Mathf.Clamp(safeDistance-0.1f,0.0f,safeDistance); }

@@ -6,7 +6,7 @@ using BehaviorDesigner.Runtime.Tasks;
 
 namespace Core.AI
 {
-    public class PlayAnimation : EnemyAction
+    public class PlayAnimation : MonsterAction
     {
 
 

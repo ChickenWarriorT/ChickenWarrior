@@ -14,9 +14,9 @@ public class MonsterMovement
 
     private Transform monsterTransform;
 
-    public MonsterMovement(MovementType type,Transform transform)
+    public MonsterMovement(MovementType type, Transform transform)
     {
-        Init(type,transform);
+        Init(type, transform);
     }
 
 
@@ -32,10 +32,13 @@ public class MonsterMovement
     {
         switch (movementType)
         {
-            case MovementType.Chasing:
+            case MovementType.ChasingPlayer:
                 MovementChasing();
                 break;
-            case MovementType.Reflect:
+            case MovementType.AwayFromPlayer:
+                MovementReflect();
+                break;
+            case MovementType.ReflectWithBoundary:
                 MovementReflect();
                 break;
         }
@@ -75,7 +78,9 @@ public class MonsterMovement
 }
 public enum MovementType
 {
-    Chasing = 1,
-    Reflect = 2
+    ChasingPlayer = 1,
+    ReflectWithBoundary = 2,
+    AwayFromPlayer = 3,
+
 }
 

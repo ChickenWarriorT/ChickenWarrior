@@ -1166,9 +1166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 20
   currentHealth: 0
-  attakDamage: 200
+  attakDamage: 1
   moveSpeed: 10
-  attackRange: 500
+  attackRange: 1
   defaultAttackCD: 10
   attackSpeed: 100
   attackCD: 2

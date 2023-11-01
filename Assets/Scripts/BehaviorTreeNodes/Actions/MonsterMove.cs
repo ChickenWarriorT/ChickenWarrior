@@ -4,99 +4,110 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-
-public class MonsterMove : Action
+namespace Core.AI
 {
-    public MovementType movementType;
-    private float distanceDetectBoundary = 2.0f;
-    private Vector2 direction;
-    private Vector2 normalVector;
-    private bool fixedUpdating = true;
-    public override void OnAwake()
+    public enum MovementType
     {
-        Init();
-        base.OnAwake();
+        ChasingPlayer,
+        AwayFromPlayer,
+        ReflectWithBoundary
     }
-    public override void OnFixedUpdate()
+    public class MonsterMove : Action
     {
-        //Move();
-        //fixedUpdating = false;
-    }
-    public override TaskStatus OnUpdate()
-    {
-        //if (!fixedUpdating)
-        //{
-        //    fixedUpdating = true;
-        //    return TaskStatus.Success;
-        //}
-        //else
-        //    return TaskStatus.Running;
-        Move();
-        return TaskStatus.Success;
-    }
-
-
-
-
-    public void Move()
-    {
-        switch (movementType)
+        public MovementType movementType;
+        private float distanceDetectBoundary = 2.0f;
+        private Vector2 direction;
+        private Vector2 normalVector;
+        public override void OnAwake()
         {
-            case MovementType.Chasing:
-                MovementChasing();
-                break;
-            case MovementType.Reflect:
-                MovementReflect();
-                break;
+            Init();
+            base.OnAwake();
         }
-    }
-
-    public void Init()
-    {
-        direction = Utilities.RandomDirection();
-        Debug.Log("出生随机方向----------：" + direction);
-    }
-    private void MovementChasing()
-    {
-        Vector2 playerPosition = PlayerManager._instance.PlayerPosition;
-        Vector2 position = transform.position;
-        Vector2 moveDir = (playerPosition - position).normalized;
-        FlipBasedOnDirection(moveDir.x);
-        Vector2 targetPosition = position + moveDir;
-
-        targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
-
-        if (position != targetPosition)
-            transform.position = Vector2.MoveTowards(position, targetPosition, transform.GetComponent<Monster>().MoveSpeed * Time.fixedDeltaTime);
-    }
-    private void MovementReflect()
-    {
-        Vector2 position = transform.position;
-        Vector2 moveDir = direction;
-        FlipBasedOnDirection(moveDir.x);
-        Vector2 targetPosition = position + moveDir;
-
-        targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
-
-        if (position != targetPosition)
-            transform.position = Vector2.MoveTowards(position, targetPosition, transform.GetComponent<Monster>().MoveSpeed * Time.fixedDeltaTime);
-
-        //检测是否在地图边界
-        if (Utilities.IsAtBoundary(transform, distanceDetectBoundary, out normalVector))
+ 
+        public override TaskStatus OnUpdate()
         {
-            direction = Utilities.RefectDirection(direction, normalVector);
-            Debug.Log("随机方向---------：" + direction);
+            Move();
+            return TaskStatus.Running;
         }
-    }
-    private void FlipBasedOnDirection(float directionX)
-    {
-        if (directionX > 0)
+
+        public void Move()
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            switch (movementType)
+            {
+                case MovementType.ChasingPlayer:
+                    MoveChasingPlayer();
+                    break;
+                case MovementType.AwayFromPlayer:
+                    MoveAwayFromPlayer();
+                    break;
+                case MovementType.ReflectWithBoundary:
+                    MoveReflectWithBoundary();
+                    break;
+            }
         }
-        else if (directionX < 0)
+
+        //初始化移动行为
+        public void Init()
         {
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            direction = Utilities.RandomDirection();
+            Debug.Log("出生随机方向----------：" + direction);
+        }
+        private void MoveChasingPlayer()
+        {
+            Vector2 playerPosition = PlayerManager._instance.PlayerPosition;
+            Vector2 position = transform.position;
+            Vector2 moveDir = (playerPosition - position).normalized;
+            FlipBasedOnDirection(moveDir.x);
+            Vector2 targetPosition = position + moveDir;
+
+            targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
+
+            if (position != targetPosition)
+                transform.position = Vector2.MoveTowards(position, targetPosition, transform.GetComponent<Monster>().MoveSpeed * Time.deltaTime);
+        }
+
+        private void MoveAwayFromPlayer()
+        {
+            Vector2 playerPosition = PlayerManager._instance.PlayerPosition;
+            Vector2 position = transform.position;
+            Vector2 moveDir = (position - playerPosition).normalized;
+            Vector2 targetPosition = position + moveDir;
+
+            targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
+            if (position != targetPosition)
+                transform.position = Vector2.MoveTowards(position, targetPosition, transform.GetComponent<Monster>().MoveSpeed * Time.deltaTime);
+        }
+
+        private void MoveReflectWithBoundary()
+        {
+            Vector2 position = transform.position;
+            Vector2 moveDir = direction;
+            FlipBasedOnDirection(moveDir.x);
+            Vector2 targetPosition = position + moveDir;
+
+            targetPosition = MapManager._instance.PosRestrainInBoundary(targetPosition);
+
+            if (position != targetPosition)
+                transform.position = Vector2.MoveTowards(position, targetPosition, transform.GetComponent<Monster>().MoveSpeed * Time.deltaTime);
+
+            //检测是否在地图边界
+            if (Utilities.IsAtBoundary(transform, distanceDetectBoundary, out normalVector))
+            {
+                direction = Utilities.RefectDirection(direction, normalVector);
+                Debug.Log("随机方向---------：" + direction);
+            }
+        }
+        private void FlipBasedOnDirection(float directionX)
+        {
+            if (directionX > 0)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if (directionX < 0)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
         }
     }
 }
+

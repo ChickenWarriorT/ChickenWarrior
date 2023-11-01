@@ -3,7 +3,7 @@ using BehaviorDesigner.Runtime.Tasks;
 
 namespace Core.AI
 {
-    public class EnemyAction : Action
+    public class MonsterAction : Action
     {
         protected Rigidbody2D body;
         protected Animator animator;
